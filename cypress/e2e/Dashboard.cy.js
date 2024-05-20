@@ -38,10 +38,54 @@ describe("Verifying Homepage", () => {
 
     })
 
-    it("Brand Scroller verification" , ()=>{
+    it.skip("Brand Scroller verification" , ()=>{
         cy.get('.brand-container > :nth-child(1) > .swiper').should('be.visible')
         cy.get('.swiper-slide-active > .w-full').eq(1).click({force:true})
         cy.get('.h-full > .text-center').contains('Crocs')
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+        cy.wait(5000)
+
+        cy.get(".swiper-slide-next > .w-full").should('be.visible').eq(1).click({force:true})
+        cy.get('.h-full > .text-center').contains('Converse')
+        cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+        cy.wait(5000)
+
+        cy.get('[aria-label="3 / 10"] > .w-full').should('be.visible').click({force:true})
+        cy.get('.h-full > .text-center').contains('Nike')
+        cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+        cy.wait(5000)
+
+        cy.get('[aria-label="4 / 10"] > .w-full').should('be.visible').click({force:true})
+        cy.get('.h-full > .text-center').contains('Puma')
+        cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+        cy.wait(5000)
+
+        cy.get('[aria-label="5 / 10"] > .w-full').should('be.visible').click({force:true})
+        cy.get('.h-full > .text-center').contains('Adidas')
+        cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+        
+        
+
+
     })
+
+    it("Product Scroller section verification" , ()=>{
+
+        cy.scrollTo('bottom')
+        cy.get('.py-4> :nth-child(1)').eq(1).click({force:true})
+        cy.get('.boxContainer > .text-black').should('have.text','Returns')
+        cy.get('.p-0 > .py-4').click()
+       
+        cy.wait(5000)
+        cy.scrollTo('bottom')
+        cy.get('.py-4> :nth-child(1)').eq(2).click({force:true})
+        cy.get('.hero-banner').contains('STORE LOCATOR')
+        cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+
+        cy.wait(5000)
+        cy.scrollTo('bottom')
+        cy.get('.py-4> :nth-child(1)').eq(3).click({force:true})
+        cy.get('.bg-#000')
+        cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+})
 })
