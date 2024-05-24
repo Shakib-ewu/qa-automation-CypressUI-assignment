@@ -35,7 +35,61 @@ describe("Verifying Homepage", () => {
         cy.get('.h-full > .text-center').contains('Steve Madden')
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
 
+        //nav menu first item
+        //cy.get('.items-center> .flex > .text-black').eq(0).click({force:true})
+
     })
+
+    it("Verifying product slider",()=>{
+        cy.scrollTo('center')
+        cy.get("button[type='button']").eq(0).contains('Shop now').click({force:true})
+        cy.wait(5000)
+        cy.get('.h-full > .text-center').should('have.text','SALE')
+        cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+        cy.wait(5000)
+        //cy.scrollTo('center')
+        //cy.get(".swiper-wrapper").click()
+        //body > main:nth-child(3) > div:nth-child(1) > div:nth-child(9) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)
+       // cy.get('.flex> .rounded-lg> .items-center> .justify-center >.text-black').click({force:true})
+        //cy.get('.py-5 >.justify-center').click()
+        //cy.get("button[class='justify-center']").click({force:true})
+    })
+
+    it("Carosoul slider",()=>{
+      cy.scrollTo('center')
+      cy.get('.flex-wrap > .font-extrabold').contains('BE READY FOR SUMMER WITH MICHAEL KORS').should('exist')
+      cy.get("a:contains('Shop Now')").click({force:true})
+      cy.wait(5000)
+      cy.get("h3").should('have.text','WOMEN - MICHAEL KORS')
+      cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+    })
+
+    it("Verifying Bulk ATC",()=>{
+      cy.scrollTo('center')
+      cy.get("button[data-contentful-field-id='ShopTheLook_button_text']").click({force:true})
+      cy.get('form.w-full > .rounded-lg').eq(0).click()
+      cy.wait(4000)
+      cy.get('form.w-full > .rounded-lg').click()
+      cy.get("button[class='w-full h-full items-center cursor-pointer hidden lg:block justify-end']").click()
+
+      //cy.get('.mt-auto > :nth-child(4) > a > .w-full').click()
+
+      
+    })
+
+    it.only("Verifying video dection",()=>{
+
+      cy.scrollTo('center')
+      cy.get('.relative > .flex > .font-extrabold').contains('SHOP FOR KIDS').should('exist')
+      cy.get('.\\[\\&\\>a\\.transition\\]\\:text-\\[14px\\] > .inline-flex')
+  .click({force:true}); 
+  cy.get('.h-full > .text-center').should('have.text','KIDS')
+  cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+
+
+    })
+
+
 
     it("Brand Scroller verification" , ()=>{
         cy.get('.brand-container > :nth-child(1) > .swiper').should('be.visible')
