@@ -1,3 +1,5 @@
+import 'cypress-mochawesome-reporter/register';
+
 describe("Verifying Homepage", () => {
 
     beforeEach(() => {
@@ -17,22 +19,22 @@ describe("Verifying Homepage", () => {
     })
     it("Verifying Hero Banner", () => {
        
-        cy.wait(6000)
+        //cy.wait(6000)
         cy.get('.swiper-slide-active > .relative > .absolute').click()
-        cy.get('.h-full > .text-center').contains('All Products')
+        cy.get('.h-full > .text-center').contains('WOMEN - MICHAEL KORS')
         cy.wait(5000)
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
         cy.get('.swiper-pagination > :nth-child(2)').click()
         cy.get('.swiper-slide-active > .relative > .absolute > .flex-col > .flex > .inline-flex').click()
-        cy.get('.h-full > .text-center').contains('Reebok')
+        cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - CONVERSE')
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
         cy.get('.swiper-pagination > :nth-child(3)').click()
         cy.get('.swiper-slide-active > .relative > .absolute > .flex-col > .flex > .inline-flex').click()
-        cy.get('.h-full > .text-center').contains('Converse')
+        cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - BIRKENSTOCK')
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
         cy.get('.swiper-pagination > :nth-child(4)').click()
         cy.get('.swiper-slide-active > .relative > .absolute > .flex-col > .flex > .inline-flex').click()
-        cy.get('.h-full > .text-center').contains('Steve Madden')
+        cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - NATIVE')
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
 
         //nav menu first item
@@ -77,7 +79,7 @@ describe("Verifying Homepage", () => {
       
     })
 
-    it.only("Verifying video dection",()=>{
+    it("Verifying video dection",()=>{
 
       cy.scrollTo('center')
       cy.get('.relative > .flex > .font-extrabold').contains('SHOP FOR KIDS').should('exist')
@@ -89,32 +91,59 @@ describe("Verifying Homepage", () => {
 
     })
 
+    it("Verifying converse section products",()=>{
+      cy.scrollTo('center')
+      cy.wait(5000)
+      //cy.get(':nth-child(1) > :nth-child(1) > .bg-\[\#F5F5F5\].w-full > .\[\@media\(max-width\:1921px\)\]\:max-w-\[1920px\] > .container > .w-auto')
+      cy.get(".container >.w-auto").eq(0).click({force:true})
+      cy.get('.h-full > .text-center').should('have.text','ALL DEPARTMENTS - CONVERSE')
+      cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click() //home-page
+
+      
+      //cy.get('.mt-auto > :nth-child(4) > a > .w-full').click()
+
+      
+
+       })
+
+       it("Verifying Skechers section products",()=>{
+        cy.scrollTo('center')
+        cy.wait(5000)
+        //cy.get(':nth-child(1) > :nth-child(1) > .bg-\[\#F5F5F5\].w-full > .\[\@media\(max-width\:1921px\)\]\:max-w-\[1920px\] > .container > .w-auto')
+        cy.get(".container >.w-auto").eq(1).click({force:true})
+        cy.get('h3').should('have.text','ALL DEPARTMENTS - SKECHERS')
+        cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click() //home-page
+  
+        
+  
+         })
+
 
 
     it("Brand Scroller verification" , ()=>{
         cy.get('.brand-container > :nth-child(1) > .swiper').should('be.visible')
         cy.get('.swiper-slide-active > .w-full').eq(1).click({force:true})
-        cy.get('.h-full > .text-center').contains('Crocs')
+        cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - CROCS')
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
         cy.wait(5000)
 
         cy.get(".swiper-slide-next > .w-full").should('be.visible').eq(1).click({force:true})
-        cy.get('.h-full > .text-center').contains('Converse')
+        cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - CONVERSE')
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
         cy.wait(5000)
 
         cy.get('[aria-label="3 / 10"] > .w-full').should('be.visible').click({force:true})
-        cy.get('.h-full > .text-center').contains('Nike')
+        cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - NIKE')
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
         cy.wait(5000)
 
         cy.get('[aria-label="4 / 10"] > .w-full').should('be.visible').click({force:true})
-        cy.get('.h-full > .text-center').contains('Puma')
+        cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - PUMA')
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
         cy.wait(5000)
 
         cy.get('[aria-label="5 / 10"] > .w-full').should('be.visible').click({force:true})
-        cy.get('.h-full > .text-center').contains('Adidas')
+        cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - ADIDAS')
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
         
         
