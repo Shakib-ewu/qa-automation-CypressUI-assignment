@@ -25,6 +25,8 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 require('@4tw/cypress-drag-drop');
 import 'cypress-file-upload';
+require('cypress-xpath');
+
 
 Cypress.Commands.add('getIframe',(iFrame)=>{
   return cy.get('#mce_0_ifr')

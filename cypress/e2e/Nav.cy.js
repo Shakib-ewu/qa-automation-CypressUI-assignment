@@ -158,6 +158,35 @@ describe("Verifying Nav menus", () => {
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()  //Homepage
     })
 
+    it.only('Verifying Language selector',()=>{
+        cy.get('.items-center> .flex > .text-black').eq(4).click({force:true})
+        cy.get("div[class='text-black text-sm 2xl:text-[14px] font-extrabold font-Mulish leading-[120%]']").click({force:true})
+
+        const slowScroll = (start, end, steps) => {
+            let currentPosition = start;
+            const increment = (end - start) / steps;
+      
+            for (let i = 0; i < steps; i++) {
+              cy.wait(500); // Adjust the wait time for a smoother/slower scroll
+              currentPosition += increment;
+              cy.scrollTo(0, currentPosition);
+            }
+          };
+      
+          // Call the slow scroll function
+          slowScroll(0, 10000, 20);
+          cy.scrollTo('top');
+          cy.wait(4000)
+          cy.get('.items-center> .flex > .text-black').eq(4).click({force:true})
+          cy.get("div[class='text-black pb-[10px] text-sm 2xl:text-[14px] font-extrabold font-Mulish leading-[120%]']").click()
+
+        
+        
+        //cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()  //Homepage
+    })
+
+
+
 
 
 })
