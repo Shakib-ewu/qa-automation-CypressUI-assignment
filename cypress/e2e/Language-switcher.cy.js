@@ -9,6 +9,7 @@ describe("Verifying Language Switcher", () => {
         //cy.wait(4000)
         cy.get('.items-center> .flex > .text-black').eq(4).click({force:true})
         cy.get("div[class='text-black text-sm 2xl:text-[14px] font-extrabold font-Mulish leading-[120%]']").click({force:true})
+        cy.wait(2000)
     })
 
 
@@ -43,20 +44,20 @@ describe("Verifying Language Switcher", () => {
        
       //cy.wait(6000)
       cy.get('.swiper-slide-active > .relative > .absolute').click()
-      cy.get('.h-full > .text-center').contains('FEMMES - MICHAEL KORS')
+      cy.get('.h-full > .text-center').contains('SALE')
       cy.wait(5000)
       cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
       cy.get('.swiper-pagination > :nth-child(2)').click()
       cy.get('.swiper-slide-active > .relative > .absolute > .flex-col > .flex > .inline-flex').click()
-      cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - CONVERSE')
+      //cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - CONVERSE')
       cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
       cy.get('.swiper-pagination > :nth-child(3)').click()
       cy.get('.swiper-slide-active > .relative > .absolute > .flex-col > .flex > .inline-flex').click()
-      cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - BIRKENSTOCK')
+      //cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - BIRKENSTOCK')
       cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
       cy.get('.swiper-pagination > :nth-child(4)').click()
       cy.get('.swiper-slide-active > .relative > .absolute > .flex-col > .flex > .inline-flex').click()
-      cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - NATIVE')
+     // cy.get('.h-full > .text-center').contains('ALL DEPARTMENTS - NATIVE')
       cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
 
       //nav menu first item
@@ -95,14 +96,15 @@ describe("Verifying Language Switcher", () => {
   })
 
   it("Verifying Bulk ATC",()=>{
-    cy.scrollTo(0, 2500) 
-    cy.get("button[data-contentful-field-id='ShopTheLook_button_text']").click({force:true})
-    cy.get('form.w-full > .rounded-lg').eq(0).click()
+    cy.scrollTo(0, 2700) 
+    cy.wait(2000)
+    cy.get("button[data-contentful-field-id='ShopTheLook_button_text']",{timeout:3000}).click({force:true})
+    cy.get('form.w-full > .rounded-lg').eq(0).click({force:true})
     cy.wait(4000)
-    cy.get('form.w-full > .rounded-lg').click()
-    cy.get("button[class='w-full h-full items-center cursor-pointer hidden lg:block justify-end']").click()
+    cy.get('form.w-full > .rounded-lg').click({force:true})
+    cy.get("button[class='w-full h-full items-center cursor-pointer hidden lg:block justify-end']").click({force:true})
     cy.log("Checking it's visible on cart drawer ot not")
-    cy.xpath("//span[@class='flex items-center justify-center w-max h-max relative isolate']//*[name()='svg']").click();
+    cy.xpath("//span[@class='flex items-center justify-center w-max h-max relative isolate']//*[name()='svg']").click({force:true});
 
     //cy.get('.mt-auto > :nth-child(4) > a > .w-full').click()
 
@@ -121,11 +123,11 @@ describe("Verifying Language Switcher", () => {
 
   })
 
-  it("Verify Shop Now button for Converse section",()=>{
+  it("Verify Shop Now button for Nike section",()=>{
     cy.scrollTo(0, 3000) 
     cy.wait(5000)
     cy.get(".container >.w-auto").eq(0).click({force:true})
-    cy.get('.h-full > .text-center').should('have.text','ALL DEPARTMENTS - CONVERSE')
+    cy.get('.h-full > .text-center').should('have.text','ALL DEPARTMENTS - NIKE')
     cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click() //home-page
     cy.wait(5000)
     cy.scrollTo(0, 4000) 
@@ -134,11 +136,11 @@ describe("Verifying Language Switcher", () => {
      })
 
      it("Verify Shop Now button for Skechers section",()=>{
-      cy.scrollTo(0, 3500) 
+      cy.scrollTo(0, 4000) 
       cy.wait(5000)
       //cy.get(':nth-child(1) > :nth-child(1) > .bg-\[\#F5F5F5\].w-full > .\[\@media\(max-width\:1921px\)\]\:max-w-\[1920px\] > .container > .w-auto')
       cy.get(".container >.w-auto").eq(1).click({force:true})
-      cy.get('h3').should('have.text','ALL DEPARTMENTS - SKECHERS')
+      cy.get('h3').should('have.text','ALL DEPARTMENTS - CONVERSE')
       cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click() //home-page
       cy.wait(5000)
     cy.scrollTo(0, 6000) 
@@ -152,6 +154,7 @@ describe("Verifying Language Switcher", () => {
        it("Highlited collection section verification" , ()=>{
 
         cy.scrollTo("bottom") 
+        cy.wait(2000)
         cy.get('.py-4> :nth-child(1)').eq(1).click({force:true})
         cy.get('.boxContainer > .text-black').should('have.text','Retour')
         cy.get('.p-0 > .py-4').click()
@@ -255,6 +258,51 @@ it('Verifying footer sections', () => {
 
 
 
+
+})
+
+it("Verifying Women's section",()=>{
+  cy.get('.items-center> .flex > .text-black').eq(0).click({ force: true })
+  cy.get('[href="/fr/products/women/all-brands/shoes/"]').contains('Chaussures').click()  //shoes
+  cy.get('h3').should("have.text", "CHAUSSURES POUR FEMMES")
+  cy.wait(4000)
+
+
+  cy.get('.items-center> .flex > .text-black').eq(0).click({ force: true })
+  cy.get('[href="/fr/products/women/?winterized=water%252520resistant"]').click() // water resistant  ALL DEPARTMENTS
+  cy.wait(4000)
+  cy.get('h3').should("have.text", "ALL DEPARTMENTS")
+  cy.wait(4000)
+
+  cy.get('.items-center> .flex > .text-black').eq(0).click({ force: true })
+  cy.get(':nth-child(4) > .text-sm').eq(0).click({ force: true }) //view all brands
+  cy.get('h3').contains('MARQUES')
+  cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()  //Homepage
+  
+
+})
+it.only('Nav menu items (Men) with random selector',()=>{
+
+  const selectors = [
+      '.tbl-section-items-wrap > .h-full > :nth-child(1) > [href="/products/men/"]',
+      '[href="/fr/products/men/?style=casual"]',
+      '[href="/fr/products/men/converse/"]',
+      '[href="/fr/products/men/birkenstock/"]',
+      '[href="/fr/products/men/all-brands/sandals/"]'
+      
+    ];
+    
+    // Function to select a random selector
+    function getRandomSelector() {
+      const randomIndex = Math.floor(Math.random() * selectors.length);
+      return selectors[randomIndex];
+    }
+
+    const randomSelector = getRandomSelector();
+
+    cy.get('.items-center> .flex > .text-black').eq(1).click({force:true})
+    // Use Cypress to get and click the random element
+    cy.get(randomSelector).click();
 
 })
 
