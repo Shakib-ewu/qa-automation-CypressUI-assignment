@@ -281,7 +281,7 @@ it("Verifying Women's section",()=>{
   
 
 })
-it.only('Nav menu items (Men) with random selector',()=>{
+it('Nav menu items (Men) with random selector',()=>{
 
   const selectors = [
       '.tbl-section-items-wrap > .h-full > :nth-child(1) > [href="/products/men/"]',
@@ -304,6 +304,75 @@ it.only('Nav menu items (Men) with random selector',()=>{
     // Use Cypress to get and click the random element
     cy.get(randomSelector).click();
 
+})
+
+it("Verifying Kid's section",()=>{
+  cy.get('.items-center> .flex > .text-black').eq(2).click({force:true})
+  cy.get('[href="/fr/products/kids/?collections=kids-best-sellers"]').click()  //All
+  cy.get('h3').should("have.text","ENFANTS")
+  cy.wait(4000)
+
+  cy.get('.items-center> .flex > .text-black').eq(2).click({force:true})
+  cy.get('[href="/fr/products/kids/all-brands/winter-boots?collections=kids-best-sellers"]').click()  //Winter boots
+  cy.get('h3').should("have.text","UNDEFINED")
+  cy.wait(4000)
+
+  cy.get('.items-center> .flex > .text-black').eq(2).click({force:true})
+  cy.get('[href="/fr/products/toddlers?collections=kids-best-sellers"]').click()  //Toddlers
+  cy.get('h3').should("have.text","TOUT-PETITS")
+  cy.wait(4000)
+
+  cy.get('.items-center> .flex > .text-black').eq(2).click({force:true})
+  cy.get(':nth-child(4) > .font-light').click() // Cribs all
+  cy.wait(4000)
+
+  cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()  //Homepage
+
+})
+
+it("Verifying Accessories's section",()=>{
+    
+  cy.get('.items-center> .flex > .text-black').eq(3).click({force:true})
+  cy.get('[href="/fr/products/shoes-care-&-insoles/"]').click()  //Shoe care & insole
+  cy.get('h3').should("have.text","ENTRETIEN DES CHAUSSURES ET SEMELLES")
+  cy.wait(4000)
+
+  cy.get('.items-center> .flex > .text-black').eq(3).click({force:true})
+  cy.get('[href="/fr/products/women/all-brands/accessories/?style=cap&style=hat&style=beanie"]').click()  //Caps and hats
+  cy.get('h3').should("have.text","ACCESSOIRES POUR FEMMES")
+  cy.wait(4000)
+
+  cy.get('.items-center> .flex > .text-black').eq(3).click({force:true})
+  cy.get('[href="/fr/products/men/all-brands/accessories/?style=backpacks&style=crossbody&style=duffel%252520bags&style=fanny%252520packs"]').click()  //Bags
+  cy.get('h3').should("have.text","ACCESSOIRES POUR HOMMES")
+  cy.wait(4000)
+
+  cy.get('.items-center> .flex > .text-black').eq(3).click({force:true})
+  cy.get('[href="/fr/products/all-departments/all-brands/accessories/?style=lunch%2520box"]').click()  //Lunch boxes
+  cy.get('h3').should("have.text","UNDEFINED")
+  cy.wait(4000)
+
+
+
+  cy.get('.items-center> .flex > .text-black').eq(3).click({force:true})
+  cy.get('[href="/fr/products/all-departments/all-brands/accessories/?style=pencil%2520case"]').click() // Pencil cases
+  cy.get('h3').should("have.text","UNDEFINED")
+  cy.wait(4000)
+
+  cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()  //Homepage
+
+})
+it('Verifying Sales Button',()=>{
+  cy.get(':nth-child(5) > .mega-menu-trigger-sibling > .flex-col').click()
+  cy.get('.h-full > .text-center').should('have.text','SALE')
+  cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()  //Homepage
+})
+
+it.only('Verifying Brands Button',()=>{
+  cy.get(':nth-child(6) > .mega-menu-trigger-sibling > .flex-col').click()
+  cy.get('.\\[\\@media\\(max-width\\:1921px\\)\\]\\:max-w-\\[1920px\\] > .flex-col > .uppercase')
+  .contains('MARQUES')
+  cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()  //Homepage
 })
 
 

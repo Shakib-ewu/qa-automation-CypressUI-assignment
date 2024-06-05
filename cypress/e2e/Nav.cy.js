@@ -150,12 +150,30 @@ describe("Verifying Nav menus", () => {
         cy.get('.h-full > .text-center').should('have.text','SALE')
         cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()  //Homepage
     })
+    function getRandomSelector() {
+        const randomNum = Math.floor(Math.random() * 26) + 1;
+        return `.hidden > .grid > :nth-child(${randomNum})`;
+      }
+      function getAlphabetFromIndex(index) {
+        return String.fromCharCode(64 + index); // A = 65 in ASCII
+      }
 
-    it('Verifying Brands section',()=>{
+    it.only('Verifying Brands section',()=>{
         cy.get(':nth-child(6) > .mega-menu-trigger-sibling > .flex-col').click()
         cy.get('.\\[\\@media\\(max-width\\:1921px\\)\\]\\:max-w-\\[1920px\\] > .flex-col > .uppercase')
         .contains('BRANDS')
-        cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()  //Homepage
+        cy.get('h3').eq(1).should('have.text','Featured brands')
+
+    const randomSelector = getRandomSelector();
+    cy.get(randomSelector).click({force:true});
+
+    const index = parseInt(randomSelector.match(/\d+/)[0]);
+    const alphabet = getAlphabetFromIndex(index);
+
+    // Scroll to the right alphabet section
+    cy.xpath(`/html[1]/body[1]/main[1]/div[1]/div[1]/div[4]/div[1]/div[2]/div[2]`).scrollIntoView().should('be.visible');
+
+       // cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()  //Homepage
     })
 
 })
