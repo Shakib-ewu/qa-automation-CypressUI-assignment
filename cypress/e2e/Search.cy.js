@@ -48,7 +48,7 @@ describe("Search Functionality Tests", () => {
         //cy.get('.error-message').should('be.visible').and('contain', 'Please enter a search term'); // Replace with your error message selector
       });
 
-      it('should handle long search terms without crashing', () => {
+      /*it.only('should handle long search terms without crashing', () => {
         const longString = 'a'.repeat(300); // 1000 characters long
         console.log('Before clicking search button');
         cy.xpath("//button[@aria-label='search-open-close-trigger']//*[name()='svg']").click({force:true})
@@ -57,7 +57,39 @@ describe("Search Functionality Tests", () => {
         cy.wait(4000)
         cy.xpath("(//*[name()='svg'][@class='aa-SubmitIcon cursor-pointer'])[1]").click({force:true,timeout: 10000 });
         cy.get('.ais-SearchBox-input').should('be.visible');
-      });
+      });*/
+      it('should handle long search terms without crashing', () => {
+        const longString = 'a'.repeat(300); // 300 characters long
+        cy.xpath("//button[@aria-label='search-open-close-trigger']//*[name()='svg']")
+          .should('be.visible')
+          .click({force:true})
+          .then(() => {
+              console.log('Clicked search button');
+          });
+    
+        cy.get('#autocomplete-0-input')
+          .should('be.visible')
+          .type(longString, {timeout: 10000})
+          .then(() => {
+              console.log('Typed into autocomplete input');
+          });
+    
+        cy.wait(4000); // Ensure any asynchronous operations are completed
+    
+        cy.xpath("(//*[name()='svg'][@class='aa-SubmitIcon cursor-pointer'])[1]")
+          .should('be.visible')
+          .click({force:true, timeout: 10000})
+          .then(() => {
+              console.log('Clicked search submit icon');
+          });
+    
+        cy.get('.ais-SearchBox-input')
+          .should('be.visible')
+          .then(() => {
+              console.log('Search box input is visible');
+          });
+    });
+    
 
       it.skip('should display autocomplete suggestions', () => {
         cy.xpath("//button[@aria-label='search-open-close-trigger']//*[name()='svg']").click({force:true})
@@ -89,21 +121,6 @@ describe("Search Functionality Tests", () => {
         cy.get('.suggested_search_result')
           .contains('View All Products') // Modify to match your specific suggestion
           .click();
-
-          /*cy.wait(4000)
-          const slowScroll = (start, end, steps) => {                // For a smooth scroll from top to bottom
-            let currentPosition = start;
-            const increment = (end - start) / steps;
-      
-            for (let i = 0; i < steps; i++) {
-              cy.wait(500); // Adjust the wait time for a smoother/slower scroll
-              currentPosition += increment;
-              cy.scrollTo(0, currentPosition);
-            }
-          };
-      
-          // Call the slow scroll function
-          slowScroll(0, 3000, 20);*/
           cy.wait(4000)
           cy.scrollTo('bottom')
 
