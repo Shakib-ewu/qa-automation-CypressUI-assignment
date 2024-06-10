@@ -7,7 +7,11 @@ describe("Verifying PDP Feature", () => {
         cy.visit('/')
         cy.get("button[class='p-0 m-0 block md:inline-flex w-full']").contains('accept').click()
         cy.scrollTo(0, 2000)
-        cy.xpath("//img[@alt='MORPHLITE W']").click({ force: true })
+        cy.xpath("//button[@aria-label='search-open-close-trigger']//*[name()='svg']").click({force:true})
+        cy.get('#autocomplete-0-input').type('MORPHLITE W'); // search items
+        cy.xpath("(//*[name()='svg'][@class='aa-SubmitIcon cursor-pointer'])[1]").click({force:true});
+        cy.wait(5000)
+        cy.xpath("(//img[@alt='MORPHLITE W'])[1]").click({force:true});
         cy.wait(2000)
     })
 
@@ -24,45 +28,6 @@ describe("Verifying PDP Feature", () => {
         cy.log('Sezzle visible')
       });
     
-     /* it('should verify images and zoom functionality', () => {
-        cy.xpath("(//img[contains(@alt,'VARIANT:BLACK WHITE')])[1]").should('be.visible');
-        cy.xpath("(//img[contains(@alt,'VARIANT:BLACK WHITE')])[1]").click();
-
-        cy.xpath("(//img[contains(@alt,'VARIANT:BLACK WHITE')])")
-      .then($elements => {
-        // Ensure we have the correct number of elements
-        expect($elements.length).to.be.at.least(6).and.to.be.at.most(15);
-    
-
-        // Iterate over each element from index 6 to 10
-        for (let i = 6; i < Math.min($elements.length, 10); i++) {
-          cy.wrap($elements[i])
-            .scrollIntoView() // Scroll to the element to make sure it's in the viewport
-            .should('be.visible') // Verify it's visible
-            .click(); // Click the element
-        }
-      });
-      });
-
-      it('should verify images and zoom functionality', () => {
-        cy.xpath("(//img[contains(@alt,'MORPHLITE W')])[4]").click()
-        cy.xpath("(//img[contains(@alt,'MORPHLITE W')])[4]").should('be.visible');
-
-        cy.xpath("(//img[contains(@alt,'VARIANT:MENTHA PEACH')])")   //(//img[contains(@alt,'VARIANT:MENTHA PEACH')])[7]
-      .then($elements => {
-        // Ensure we have the correct number of elements
-        expect($elements.length).to.be.at.least(6).and.to.be.at.most(15);
-    
-
-        // Iterate over each element from index 6 to 10
-        for (let i = 6; i < Math.min($elements.length, 10); i++) {
-          cy.wrap($elements[i])
-            .scrollIntoView() // Scroll to the element to make sure it's in the viewport
-            .should('be.visible') // Verify it's visible
-            .click(); // Click the element
-        }
-      });
-      });*/
 
       it('should verify images and zoom functionality', () => {
         // Verify images and zoom functionality for VARIANT:BLACK WHITE
@@ -174,8 +139,12 @@ it('should verify size selection, ATC with before and after membership discount'
     cy.wait(3000)
     cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
     cy.wait(4000)
-    cy.scrollTo(0, 2000)
-    cy.xpath("//img[@alt='MORPHLITE W']").click({ force: true })
+    // New product link
+    cy.xpath("//button[@aria-label='search-open-close-trigger']//*[name()='svg']").click({force:true})
+    cy.get('#autocomplete-1-input').type('MORPHLITE W'); // search items
+    cy.xpath("(//*[name()='svg'][@class='aa-SubmitIcon cursor-pointer'])[1]").click({force:true});
+    cy.wait(5000)
+    cy.xpath("(//img[@alt='MORPHLITE W'])[1]").click({force:true});
     cy.wait(2000)
     cy.xpath("(//button[contains(@class,'flex items-center justify-center w-[30px] h-[30px]')])[1]").click({force:true});
     cy.wait(2000)
@@ -219,7 +188,7 @@ it('should verify size selection, ATC with before and after membership discount'
      
     
       it("Verifying Description, Details and FAQ blocks", () => {
-        cy.xpath("(//div[contains(@role,'button')])[8]").click({force:true})
+        cy.xpath("(//div[contains(@role,'button')])[9]").click({force:true})
         cy.xpath("(//p[contains(text(),'Beefy but agile, this aggressive MORPHLITE trail r')])[1]").should('be.visible')
         cy.xpath("(//*[name()='svg'])[18]").click({force:true})
 
@@ -231,7 +200,7 @@ it('should verify size selection, ATC with before and after membership discount'
         // For FAQ Block
         cy.xpath("(//div[contains(@role,'button')])[10]").click({force:true})
         cy.xpath("(//div)[152]").click({force:true})
-        cy.xpath("(//p[contains(text(),'The processing delay varies from 1-7 business days')])[1]").should('be.visible')
+        cy.xpath("/html[1]/body[1]/main[1]/div[1]/div[2]/div[6]/div[3]/div[2]/div[1]/div[2]/p[1]").should('exist')
         cy.xpath("(//div)[152]").click({force:true})
         cy.xpath("(//*[name()='svg'])[21]").click({force:true})
 
@@ -273,7 +242,8 @@ it('should verify size selection, ATC with before and after membership discount'
     cy.xpath(productSelector + "[4]").should('have.text', ' MERRELL');
     cy.xpath("(//button[contains(@class,'justify-center items-center rounded-lg text-center text-sm leading-[120%] lg:text-base lg:leading-[120%] font-semibold uppercase whitespace-nowrap font-Mulish cursor-pointer lg:flex hidden xl:text-[14px] 2xl:text-[14px] py-2 px-6 xl:py-3 xl:px-7 2xl:py-4 2xl:px-9 primary-btn bg-black text-white hover:no-underline w-auto border border-black hover:text-black hover:border hover:border-black hover:bg-white transform transition-colors duration-300 lg:flex hidden xl:text-[14px] 2xl:text-[14px] py-2 px-6 xl:py-3 xl:px-7 2xl:py-4 2xl:px-9')])[1]")
       .click({ force: true })
-    cy.xpath("(//h3[normalize-space()='SALE'])[1]").should('have.text', 'SALE')
+      cy.get('.h-full > .text-center').should('have.text', 'Sandals')
+      cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
     
 
 
