@@ -1,4 +1,4 @@
-describe("Verifying Cart Drawer", () => {
+describe("Verifying Cart Drawer French", () => {
 
     beforeEach(() => {
 
@@ -8,7 +8,7 @@ describe("Verifying Cart Drawer", () => {
         cy.get("button[class='p-0 m-0 block md:inline-flex w-full']").contains('accept').click()
         //cy.wait(4000)
         cy.get('.items-center> .flex > .text-black').eq(4).click({force:true})
-        cy.get("div[class='text-black text-sm 2xl:text-[14px] font-extrabold font-Mulish leading-[120%]']").click({force:true})
+        //cy.get("div[class='text-black text-sm 2xl:text-[14px] font-extrabold font-Mulish leading-[120%]']").click({force:true})
         cy.wait(2000)
     })
 
@@ -36,7 +36,7 @@ describe("Verifying Cart Drawer", () => {
           cy.xpath("/html[1]/body[1]/aside[1]/main[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/a[1]/div[1]").click({force:true})
           cy.wait(4000)
 
-          cy.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/p[1]/div[1]/span[1]/a[1]").click({force:true})
+          cy.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[2]/p[1]/div[1]/span[1]/a[1]").click({ force: true });
           
           
            // cy.get("button[class='w-full h-full items-center cursor-pointer hidden lg:block justify-end']").click().should('be.visible'); // Adjust the selector as necessary

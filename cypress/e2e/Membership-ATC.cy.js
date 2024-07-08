@@ -103,7 +103,9 @@ it.only("should verify product price before and after adding membership ATC when
    // cy.xpath("(//div)[65]").click({ force: true });
 
     // Click the final "Add To Cart" button
-    cy.xpath("//button[normalize-space()='ADD TO CART']")
+    cy.xpath("(//img)[3]").click({force:true})
+    cy.wait(2000)
+    cy.xpath("(//button[contains(text(),'ADD TO CART')])[1]")
         .click({ force: true });
 
     // Wait for the special offer to be visible
@@ -146,7 +148,8 @@ it.only("should verify product price before and after adding membership ATC when
             cy.log('Discounted Price: ' + discountedPrice);
             cy.log('Expected Discounted Price: ' + expectedDiscountedPrice);
             expect(discountedPrice).to.be.closeTo(expectedDiscountedPrice, 0.01); // Ensure the discounted price is 10% less
-
+            
+            //checking membership badge
             cy.xpath("(//div[@class='w-max mb-[11px] lg:mb-[21px] bg-[#EBC436] rounded-[4px] p-[6px] text-black font-Mulish text-[11px] md:text-[14px] font-[600] leading-[140%] tracking-[0.2px]'])[1]").should('be.visible')
 
             // Extract and verify the subtotal price

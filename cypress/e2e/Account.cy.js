@@ -1,3 +1,4 @@
+import 'cypress-mochawesome-reporter/register';
 describe("Verifying Account Page", () => {
 
     beforeEach(() => {
@@ -80,7 +81,7 @@ it('Verify User Can Log In', () => {
   });
 });
 
-it.skip('Verify Account Information Content', () => {
+/*it.skip('Verify Account Information Content', () => {
   cy.xpath("//a[@aria-label='account-icon']//*[name()='svg']").click();
   cy.log('Clicking on login link');
   cy.xpath("(//a[normalize-space()='Log in'])[1]").click();
@@ -141,7 +142,7 @@ it.skip('Verify Personal Information Page Tests', () => {
 
   //
 
-  });
+  });*/
 
   it('Verify Edit Password Page Tests', () => {
     cy.xpath("//a[@aria-label='account-icon']//*[name()='svg']").click();
@@ -259,7 +260,7 @@ it('Verify Rubino Membership', () => {
   cy.log('Checking Rubino Membership');
   cy.wait(3000)
 
-  cy.get('[href="/account/membership/"]').click({force:true})  //clicking rubino membership
+  cy.xpath("//span[normalize-space()='Rubino Membership']").click({force:true})  //clicking rubino membership
   cy.get('.max-w-full > .inline-flex').click()
   cy.wait(5000)
 
@@ -267,19 +268,19 @@ it('Verify Rubino Membership', () => {
   cy.get('#mainContent > .flex-row > .flex > .text-black').should('have.text','You’re A Rubino Member.')
 
   cy.xpath("(//a[normalize-space()='Browse Member Zone'])[1]").click({force:true})
-  cy.get('h3').should('have.text','ALL DEPARTMENTS')
+  cy.get('h3').should('have.text','All Products')
   cy.xpath("//a[@aria-label='account-icon']//*[name()='svg']").click({force:true});
   cy.get('[href="/account/membership/"]').click({force:true})
   cy.xpath("(//a[normalize-space()='go to shop'])[1]").as('btn').click({force:true})
   cy.wait(4000)
 
-  cy.get('h3').should('have.text','ALL DEPARTMENTS')
+  cy.get('h3').should('have.text','All Products')
   cy.xpath("//a[@aria-label='account-icon']//*[name()='svg']").click({force:true});
   cy.get('[href="/account/membership/"]').click({force:true})
   cy.xpath("//a[normalize-space()='shop now']").click({force:true})
 
   cy.wait(4000)
-  cy.get('h3').should('have.text','ALL DEPARTMENTS')
+  cy.get('h3').should('have.text','All Products')
   cy.xpath("//a[@aria-label='account-icon']//*[name()='svg']").click({force:true});
   cy.get('[href="/account/membership/"]').click({force:true})
   cy.xpath("//a[normalize-space()='start return']").contains('start return').click({force:true})

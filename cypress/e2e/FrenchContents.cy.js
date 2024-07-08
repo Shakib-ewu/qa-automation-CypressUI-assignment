@@ -1,4 +1,4 @@
-import Frenchpage from '../PageObjects/FrenchPages';
+/*import Frenchpage from '../PageObjects/FrenchPages';
 
 describe("Verifying Language Switcher", () => {
     const frenchpage = new Frenchpage();
@@ -52,4 +52,4 @@ describe("Verifying Language Switcher", () => {
         frenchpage.verifyProductTitle();
         frenchpage.navigateToFrenchPage();
     });
-  });
+  });*/

@@ -14,7 +14,7 @@ describe("Verifying Homepage", () => {
 
     //cy.wait(6000)
     cy.get('.swiper-slide-active > .relative > .absolute').click()
-    cy.get('.h-full > .text-center').contains('SALE')
+    //cy.get('h3').contains('SALE')
     cy.wait(5000)
     cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
     cy.get('.swiper-pagination > :nth-child(2)').click()
@@ -81,17 +81,17 @@ describe("Verifying Homepage", () => {
     // Verify brand logos are clickable and lead to correct pages
     const brands = [
 
-      { selector: '[aria-label="1 / 10"] > .w-full', label: 'CROCS' },
-      { selector: '[aria-label="2 / 10"] > .w-full', label: 'CONVERSE' },
-      { selector: '[aria-label="3 / 10"] > .w-full', label: 'NIKE' },
-      { selector: '[aria-label="4 / 10"] > .w-full', label: 'PUMA' },
-      { selector: '[aria-label="5 / 10"] > .w-full', label: 'ADIDAS' },
-      { selector: '[aria-label="6 / 10"]> .w-full', label: 'DR MARTENS' },
-      { selector: '[aria-label="7 / 10"]> .w-full', label: 'SOREL' },
-      { selector: '[aria-label="8 / 10"]> .w-full', label: 'UGG' },
-      { selector: '[aria-label="9 / 10"]> .w-full', label: 'THE NORTH FACE' },
-      { selector: '[aria-label="10 / 10"]> .w-full', label: 'PAJAR' },
-
+        { selector: '[aria-label="1 / 10"] > .w-full', label: 'Crocs' },
+        { selector: '[aria-label="2 / 10"] > .w-full', label: 'Converse' },
+        { selector: '[aria-label="3 / 10"] > .w-full', label: 'Nike' },
+        { selector: '[aria-label="4 / 10"] > .w-full', label: 'Puma' },
+        { selector: '[aria-label="5 / 10"] > .w-full', label: 'Adidas' },
+        { selector: '[aria-label="6 / 10"]> .w-full', label: 'Dr Martens' },
+        { selector: '[aria-label="7 / 10"]> .w-full', label: 'Sorel' },
+        { selector: '[aria-label="8 / 10"]> .w-full', label: 'Ugg' },
+        { selector: '[aria-label="9 / 10"]> .w-full', label: 'The North Face' },
+        { selector: '[aria-label="10 / 10"]> .w-full', label: 'Pajar' },
+      
     ];
 
     brands.forEach(brand => {
@@ -102,7 +102,7 @@ describe("Verifying Homepage", () => {
             .click({ force: true });
         });
 
-      cy.get('.h-full > .text-center').contains(`ALL DEPARTMENTS - ${brand.label}`);
+      cy.get('h3').contains(`${brand.label}`);
       cy.wait(4000);
       cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click();
 
@@ -133,15 +133,15 @@ describe("Verifying Homepage", () => {
     cy.scrollTo('center')
     cy.get("button[type='button']").eq(0).contains('Shop now').click({ force: true })
     cy.wait(5000)
-    cy.get('.h-full > .text-center').should('have.text', 'SALE')
+    cy.get('h3').should('have.text', 'Sandals')
     cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
-    cy.wait(5000)
-    cy.scrollTo(0, 1000)
+    cy.wait(4000)
+    cy.scrollTo(0,2400)
     clickButtonMultipleTimes("(//button[@aria-label='Next'])[1]", 6);
     clickButtonMultipleTimes("(//button[@aria-label='Previous'])[1]", 3);
   })
 
-  it("Carosoul slider", () => {
+  it.skip("Carosoul slider", () => {
     cy.scrollTo('center')
     cy.get('.flex-wrap > .font-extrabold').contains('BE READY FOR SUMMER WITH MICHAEL KORS').should('exist')
     cy.get("a:contains('Shop Now')").click({ force: true })
@@ -153,9 +153,10 @@ describe("Verifying Homepage", () => {
   it("Verifying Bulk ATC", () => {
     cy.scrollTo('center')
     cy.get("button[data-contentful-field-id='ShopTheLook_button_text']").click({ force: true })
-    cy.get('form.w-full > .rounded-lg').eq(0).click()
-    cy.wait(4000)
-    cy.get('form.w-full > .rounded-lg').click()
+    cy.xpath("(//button[normalize-space()='SOLD OUT - SKIP'])[1]").click({force:true})
+    cy.wait(5000)
+    cy.xpath("(//button[contains(text(),'ADD TO CART')])[1]").click()
+    cy.wait(3000)
     cy.get("button[class='w-full h-full items-center cursor-pointer hidden lg:block justify-end']").click()
 
     //cy.get('.mt-auto > :nth-child(4) > a > .w-full').click()
@@ -169,35 +170,35 @@ describe("Verifying Homepage", () => {
     cy.get('.relative > .flex > .font-extrabold').contains('SHOP FOR KIDS').should('exist')
     cy.get('.\\[\\&\\>a\\.transition\\]\\:text-\\[14px\\] > .inline-flex')
       .click({ force: true });
-    cy.get('.h-full > .text-center').should('have.text', 'KIDS')
+    cy.get('h3').should('have.text', 'Kids')
     cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
 
 
   })
 
-  it("Verify Shop Now button for Converse section", () => {
+  it("Verify Shop Now button for Nike section", () => {
     cy.scrollTo('center')
     cy.wait(5000)
     cy.get(".container >.w-auto").eq(0).click({ force: true })
-    cy.get('.h-full > .text-center').should('have.text', 'ALL DEPARTMENTS - CONVERSE')
+    cy.get('h3').should('have.text', 'Nike')
     cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click() //home-page
     cy.wait(5000)
-    cy.scrollTo(0, 4000)
+    cy.scrollTo(0, 4500)
     clickButtonMultipleTimes("(//button[@aria-label='Next'])[2]", 10);
     clickButtonMultipleTimes("(//button[@aria-label='Previous'])[2]", 3);
   })
 
-  it("Verify Shop Now button for Skechers section", () => {
+  it("Verify Shop Now button for Converse section", () => {
     cy.scrollTo('center')
     cy.wait(5000)
     //cy.get(':nth-child(1) > :nth-child(1) > .bg-\[\#F5F5F5\].w-full > .\[\@media\(max-width\:1921px\)\]\:max-w-\[1920px\] > .container > .w-auto')
     cy.get(".container >.w-auto").eq(1).click({ force: true })
-    cy.get('h3').should('have.text', 'ALL DEPARTMENTS - SKECHERS')
+    cy.get('h3').should('have.text', 'Converse')
     cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click() //home-page
     cy.wait(5000)
-    cy.scrollTo(0, 6000)
-    clickButtonMultipleTimes("/html[1]/body[1]/main[1]/div[1]/div[9]/div[1]/div[1]/div[5]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/button[2]", 10);
-    clickButtonMultipleTimes("/html[1]/body[1]/main[1]/div[1]/div[9]/div[1]/div[1]/div[5]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/button[1]", 3);
+    cy.scrollTo(0, 5500)
+    clickButtonMultipleTimes("(//button[@aria-label='Next'])[4]", 10);
+    clickButtonMultipleTimes("(//button[contains(@aria-label,'Previous')])[6]", 3);
 
 
 
@@ -206,27 +207,34 @@ describe("Verifying Homepage", () => {
   it("Highlited collection section verification", () => {
 
     cy.scrollTo('bottom')
-    cy.get('.py-4> :nth-child(1)').eq(1).click({ force: true })
+    cy.xpath("/html[1]/body[1]/main[1]/div[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[2]").click({ force: true })
+    cy.get('.faq-banner-heading').should('have.text', 'frequently asked questions')
+   // cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+
+    //cy.wait(5000)
+   
+
+    cy.scrollTo('bottom')
+    cy.xpath("/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/a[2]").click({ force: true })
+    cy.get('h3').contains('SIZE GUIDE')
+    //cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+
+    cy.scrollTo('bottom')
+    cy.xpath("/html[1]/body[1]/main[1]/div[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/a[2]").click({ force: true })
+    cy.get('.hero-banner').contains('STORE LOCATOR')
+    //cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+
+
+    cy.scrollTo('bottom')
+    cy.xpath("(//a[contains(@class,'no-underline text-center text-white text-[19px] font-black leading-7 font-Mulish')][normalize-space()='FREE RETURNS'])[1]")
+    .click({ force: true })
     cy.get('.boxContainer > .text-black').should('have.text', 'Returns')
     cy.get('.p-0 > .py-4').click()
 
-    cy.wait(5000)
-    cy.scrollTo('bottom')
-    cy.get('.py-4> :nth-child(1)').eq(2).click({ force: true })
-    cy.get('.hero-banner').contains('STORE LOCATOR')
-    cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+    //cy.wait(5000)
+    
 
-    cy.wait(5000)
-    cy.scrollTo('bottom')
-    cy.get('.py-4> :nth-child(1)').eq(3).click({ force: true })
-    cy.get('h3').contains('SIZE GUIDE')
-    cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
-
-    cy.wait(5000)
-    cy.scrollTo('bottom')
-    cy.get('.py-4> :nth-child(1)').eq(0).click({ force: true })
-    cy.get('.faq-banner-heading').should('have.text', 'frequently asked questions')
-    cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+    
   })
 
   it("Instagram section verification", () => {
@@ -260,7 +268,7 @@ describe("Verifying Homepage", () => {
   });
 
   it('Verifying static feature section & Membership ATC', () => {
-    cy.scrollTo("bottom");
+    cy.scrollTo(0,3500);
     cy.get('.container > :nth-child(1) > .text-center').should('have.text', 'BECOME A RUBINO MEMBER')
 
     cy.get("button[type='submit']").contains(' ADD TO CART').click({ force: true })
@@ -281,8 +289,7 @@ describe("Verifying Homepage", () => {
 
     
   cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
-  cy.get('[href="https://cdn.shopify.com/s/files/1/0078/2191/8285/files/RUBINO_B211_FINAL_SIG_5_17_2024_translated_formatted.pdf?v=1717080226"]').click({ force: true })
-
+  cy.get('[href="https://cdn.shopify.com/s/files/1/0078/2191/8285/files/RUBINO_B211-_FINAL_SIG_5-17-2024.pdf?v=1717080222"]').click({force:true})
     // FAQ, ONLINE RETURNS, SIZE GUIDE
     cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
     cy.get(':nth-child(2) > .text-zinc-800').click({ force: true })

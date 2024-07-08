@@ -39,7 +39,7 @@ describe("Verifying Homepage", () => {
       
       
     // Add similar assertions for other filter labels (BRANDS, COLOR, etc.)
-      it.only('should verify options under Department dropdown menu', () => {
+      it('should verify options under Department dropdown menu', () => {
         // Define the list of expected options
         const expectedOptions = [
           'WOMEN',
@@ -66,73 +66,132 @@ describe("Verifying Homepage", () => {
         });
       });
       
-      
-      
-      
-      
-      
-      
+
+    const filterOptions = ['SHOES', 'SANDALS', 'WINTER BOOTS', 'BOOTS', 'ACCESSORIES', 'SLIPPERS', 'RAIN BOOTS'];
 
 
     it('should have filter options under CATEGORIES', () => {
-        cy.get('.filter-section .category-filter').find('.option').should('have.length.greaterThan', 0)
-    })
+        filterOptions.forEach(option => {
+            // Click on the "Categories" to open the drop-down menu
+            cy.xpath("//span[normalize-space()='Categories']").click();
+            
+            // Select the filter option dynamically based on the current option
+            cy.xpath(`//button[normalize-space()='${option}']`).click();
+            
+            // Wait for a brief moment to ensure the filter is applied
+            cy.get('h3').should('be.visible')
+            cy.wait(4000);  // Adjust the wait time as needed
+            
+            // Verify that the "Clear All Filters" button is visible and click it
+            cy.xpath("(//button[normalize-space()='Clear All Filters'])[1]").should('be.visible').click();
+            
+            // Optionally, wait for a brief moment to ensure filters are cleared
+            cy.wait(1000);  // Adjust the wait time as needed
+        });
+    });
+    
 
-    it('should filter products by department', () => {
-        cy.get('.filter-section .department-filter').select('Men') // Replace 'Men' with the actual option value
-        cy.get('.product-list').should('contain', 'Men') // Update the assertion to match how products are displayed based on filter selection
-    })
+    
 
-    it('should have pagination when many results are filtered', () => {
-        cy.get('.filter-section').selectMany('filter1', 'value1', 'filter2', 'value2') // Select multiple filters
-        cy.get('.pagination').should('be.visible')
-    })
+    const filterOptionsBrands = [
+      'ACTON', 'ADIDAS', 'BLONDO', 'BOGS', 'CLARKS', 'CONVERSE', 'DAVID',
+      'FILA', 'ITALIAN SHOE', 'KAMIK', 'KEEN', 'LASKA', 'MERRELL', 'NATIVE',
+      'PUMA', 'REEBOK', 'RUBINO', 'SOREL', 'TEVA', 'UGG', 'VANS', 'WALTERS'
+    ];
+    
+    it('should have filter options under Brands', () => {
+      filterOptionsBrands.forEach(option => {
+        // Click on the "Brands" to open the drop-down menu
+        cy.xpath("//span[normalize-space()='Brands']").click();
+        
+        // Scroll to the element containing the current option
+        cy.xpath(`//button[normalize-space()='${option}']`).scrollIntoView().should('be.visible').click({ force: true });
+        
+        // Wait for a brief moment to ensure the filter is applied
+        cy.get('h3').should('be.visible');
+        cy.wait(2000);  // Adjust the wait time as needed
+        
+        // Verify that the "Clear All Filters" button is visible and click it
+        cy.xpath("(//button[normalize-space()='Clear All Filters'])[1]").should('be.visible').click();
+        
+        // Optionally, wait for a brief moment to ensure filters are cleared
+        cy.wait(1000);  // Adjust the wait time as needed
+      });
+    });
 
-    it('should load more results on infinite scroll', () => {
-        cy.get('.product-list').should('have.length', 10) // Initial number of products
-        cy.scrollTo('bottom')
-        cy.get('.product-list').should('have.length.greaterThan', 10) // More products loaded after scroll
-    })
 
-    it('should show total results count after filtering', () => {
-        cy.get('.filter-section').selectMany('filter1', 'value1')
-        cy.get('.results-count').should('contain', '25 Products Found') // Adjust based on actual text
-    })
 
-    it('should show all products when no filters are selected', () => {
-        cy.get('.filter-section input').clear() // Clear any pre-selected options
-        cy.get('.product-list').should('have.length.greaterThan', 10) // Ensure there are products displayed
-    })
+    const filterOptionsPrice = ['ABOVE 50%', '30% - 50%', '10% - 30%', 'Under 10%'];
 
-    it('should handle invalid filter values', () => {
-        cy.get('.filter-section .department-filter').select('Invalid Department')
-        // Check for error message or verify no change in results (adjust based on website behavior)
-    })
 
-    it('should handle empty filter options', () => {
-        cy.get('.filter-section .out-of-stock-filter').should('be.disabled') // Example for Out-of-Stock filter
-        // Alternatively, check for a message indicating no options
-    })
+    it('should have filter Price Category', () => {
+        filterOptionsPrice.forEach(option => {
+            // Click on the "Categories" to open the drop-down menu
+            cy.xpath("//span[normalize-space()='Price sale']").click();
+            
+            // Select the filter option dynamically based on the current option
+            cy.xpath(`//button[normalize-space()='${option}']`).click();
+            
+            // Wait for a brief moment to ensure the filter is applied
+            cy.get('h3').should('be.visible')
+            cy.wait(4000);  // Adjust the wait time as needed
+            
+            // Verify that the "Clear All Filters" button is visible and click it
+            cy.xpath("(//button[normalize-space()='Clear All Filters'])[1]").should('be.visible').click();
+            
+            // Optionally, wait for a brief moment to ensure filters are cleared
+            cy.wait(1000);  // Adjust the wait time as needed
+        });
+    });
+    
 
-    it('should sort products by price (low to high)', () => {
-        cy.get('.sort-dropdown').select('Price (Low to High)')
-        cy.get('.product-list').should('be.sorted', { by: '.price', ascending: true }) // Assert sorted prices
-    })
 
-    it('should filter products by price range', () => {
-        cy.get('.filter-section .price-range').selectRange(100, 200)
-        cy.get('.product-list').each(($el) => {
-            const price = parseInt($el.find('.price').text())
-            expect(price).to.be.greaterThanOrEqual(100).and.lessThanOrEqual(200)
-        })
-    })
+
+    it('should filter products by adjusting the price range slider by position', () => {
+      // Open the Price filter section
+      cy.xpath("//span[normalize-space()='Price']").click();
+      cy.xpath("//div[@aria-label='Lower thumb']").invoke( "attr", "style", "left:200px").click({force:true})
+      cy.xpath("//div[@aria-label='Upper thumb']").click({force:true}).invoke( "attr", "style", "right:50px")
+      //cy.xpath("//div[@aria-label='Lower thumb']").invoke( "attr", "style", "left:80px").click({force:true})
+     // cy.xpath("//div[@aria-label='Upper thumb']").invoke( "attr", "style", "right:100px").click({force:true})
+
+    // cy.xpath("//div[@aria-label='Upper thumb']").trigger('mousemove', { left: 100, right: 0 });
+
+    
+     
+    });
+
+  
+    
+    
+    
 
 
 
           
+    const filterOptionsSortby = ['Alphabetically, Z-A', 'Alphabetically, A-Z', 'Price, Low to High', 'Price, High to Low', 'Oldest','Most relevant','New arrivals'];  
           
-          
-
+    it('verifies Sort By New Arrivals Filters', () => {
+      filterOptionsSortby.forEach(option => {
+        // Click on the "Brands" to open the drop-down menu
+        cy.get("p[class='text-[13px]']").click();
+        
+        // Scroll to the element containing the current option
+        cy.xpath(`//p[normalize-space()='${option}']`).should('be.visible').click({ force: true });  ////p[normalize-space()='Alphabetically, Z-A']
+        
+        // Wait for a brief moment to ensure the filter is applied
+        cy.get('h3').should('be.visible');
+        cy.wait(2000);  // Adjust the wait time as needed
+        
+        // Verify that the "Clear All Filters" button is visible and click it
+        //cy.xpath("(//button[normalize-space()='Clear All Filters'])[1]").should('be.visible').click();
+        
+        // Optionally, wait for a brief moment to ensure filters are cleared
+        cy.wait(1000);  // Adjust the wait time as needed
+      });
+    })
+      
+    
 
       
 

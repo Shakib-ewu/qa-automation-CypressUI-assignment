@@ -23,6 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+//require('cypress-plugin-retries');
 require('@4tw/cypress-drag-drop');
 import 'cypress-file-upload';
 require('cypress-xpath');

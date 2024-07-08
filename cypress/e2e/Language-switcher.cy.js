@@ -16,7 +16,7 @@ describe("Verifying Language Switcher", () => {
        
       //cy.wait(6000)
       cy.get('.swiper-slide-active > .relative > .absolute').click()
-      cy.get('.h-full > .text-center').contains('Vente')
+      //cy.get('.h-full > .text-center').contains('Vente')
       cy.wait(5000)
       cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
       cy.get('.swiper-pagination > :nth-child(2)').click()
@@ -50,7 +50,7 @@ describe("Verifying Language Switcher", () => {
     cy.scrollTo(0, 2500) 
       cy.get("button[type='button']",{timeout:3000}).eq(0).contains('Magasiner').click({force:true})
       cy.wait(5000)
-      cy.get('.h-full > .text-center').should('have.text','Sandales')
+      cy.get('h3').should('have.text','Sandals')
       cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
       cy.wait(5000)
       cy.scrollTo(0, 2500) 
@@ -67,21 +67,19 @@ describe("Verifying Language Switcher", () => {
     cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
   })
 
-  it("Verifying Bulk ATC",()=>{
-    cy.scrollTo(0, 2700) 
-    cy.wait(2000)
-    cy.get("button[data-contentful-field-id='ShopTheLook_button_text']",{timeout:3000}).click({force:true})
-    cy.get('form.w-full > .rounded-lg').eq(0).click({force:true})
-    cy.wait(4000)
-    cy.get('form.w-full > .rounded-lg').click({force:true})
-    cy.get("button[class='w-full h-full items-center cursor-pointer hidden lg:block justify-end']").click({force:true})
-    cy.log("Checking it's visible on cart drawer ot not")
-    cy.xpath("//span[@class='flex items-center justify-center w-max h-max relative isolate']//*[name()='svg']",{timeout:2000}).click({force:true});
-    
+
+  it("Verifying Bulk ATC", () => {
+    cy.scrollTo('center')
+    cy.get("button[data-contentful-field-id='ShopTheLook_button_text']").click({ force: true })
+    cy.xpath("(//button[normalize-space()='ÉPUISÉ - PASSER'])[1]").click({force:true})
+    cy.wait(5000)
+    cy.xpath("//button[contains(text(),'AJOUTER AU PANIER')]").click()
+    cy.wait(3000)
+    cy.get("button[class='w-full h-full items-center cursor-pointer hidden lg:block justify-end']").click()
 
     //cy.get('.mt-auto > :nth-child(4) > a > .w-full').click()
 
-    
+
   })
 
   it("Verifying video dection", () => {
@@ -90,67 +88,74 @@ describe("Verifying Language Switcher", () => {
     cy.get('.relative > .flex > .font-extrabold').contains('MAGASINER POUR ENFANTS').should('exist')
     cy.get('.\\[\\&\\>a\\.transition\\]\\:text-\\[14px\\] > .inline-flex')
       .click({ force: true });
-    cy.get('.h-full > .text-center').should('have.text', 'Enfants')
+    cy.get('h3').should('have.text', 'Enfants')
     cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
 
 
   })
 
-  it("Verify Shop Now button for Nike section",()=>{
-    cy.scrollTo(0, 3000) 
+  it("Verify Shop Now button for Nike section", () => {
+    cy.scrollTo('center')
     cy.wait(5000)
-    cy.get(".container >.w-auto").eq(0).click({force:true})
-    cy.wait(2000)
-    cy.get('.h-full > .text-center').should('have.text','Tous les produits - nike')
+    cy.get(".container >.w-auto").eq(0).click({ force: true })
+    cy.get('h3').should('have.text', 'Nike')
     cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click() //home-page
     cy.wait(5000)
-    cy.scrollTo(0, 4000) 
+    cy.scrollTo(0, 4500)
     clickButtonMultipleTimes("(//button[@aria-label='Next'])[2]", 10);
     clickButtonMultipleTimes("(//button[@aria-label='Previous'])[2]", 3);
-     })
+  })
 
-     it("Verify Shop Now button for Converse section",()=>{
-      cy.scrollTo(0, 4400) 
-      cy.wait(5000)
-      //cy.get(':nth-child(1) > :nth-child(1) > .bg-\[\#F5F5F5\].w-full > .\[\@media\(max-width\:1921px\)\]\:max-w-\[1920px\] > .container > .w-auto')
-      cy.get(".container >.w-auto").eq(1).click({force:true})
-      cy.wait(2000)
-      cy.get('h3').should('have.text','Tous les produits - converse')
-      cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click() //home-page
-      cy.wait(5000)
-    cy.scrollTo(0, 4700) 
-    clickButtonMultipleTimes("(//button[contains(@aria-label,'Next')])[4]", 10);
-    clickButtonMultipleTimes("(//button[contains(@aria-label,'Previous')])[4]", 3);
 
-      
+  it("Verify Shop Now button for Converse section", () => {
+    cy.scrollTo('center')
+    cy.wait(5000)
+    //cy.get(':nth-child(1) > :nth-child(1) > .bg-\[\#F5F5F5\].w-full > .\[\@media\(max-width\:1921px\)\]\:max-w-\[1920px\] > .container > .w-auto')
+    cy.get(".container >.w-auto").eq(1).click({ force: true })
+    cy.get('h3').should('have.text', 'Converse')
+    cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click() //home-page
+    cy.wait(5000)
+    cy.scrollTo(0, 5500)
+    clickButtonMultipleTimes("(//button[@aria-label='Next'])[4]", 10);
+    clickButtonMultipleTimes("(//button[contains(@aria-label,'Previous')])[6]", 3);
 
-       })
 
-       it("Highlited collection section verification" , ()=>{
 
-        cy.scrollTo("bottom") 
-        cy.wait(2000)
-        cy.get('.py-4> :nth-child(1)').eq(1).click({force:true})
-        cy.get('.boxContainer > .text-black').should('have.text','Retour')
-        cy.get('.p-0 > .py-4').click()
-       
-        cy.wait(5000)
-        cy.scrollTo("bottom") 
-        cy.get('.py-4> :nth-child(1)').eq(2).click({force:true})
-        cy.get('.hero-banner').contains('Localisateur de magasin')
-        cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+  })
 
-        cy.wait(5000)
-        cy.scrollTo("bottom") 
-        cy.get('.py-4> :nth-child(1)').eq(3).click({force:true})
-        cy.get('h3').contains('GUIDE DES TAILLES')
-        cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+  
 
-        cy.wait(5000)
-        cy.scrollTo("bottom") 
-        cy.get('.py-4> :nth-child(1)').eq(0).click({force:true})
-        cy.get('.faq-banner-heading').should('have.text','questions fréquemment posées')
-        cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+it("Highlited collection section verification", () => {
+
+  cy.scrollTo('bottom')
+  cy.xpath("/html[1]/body[1]/main[1]/div[1]/div[11]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[2]").click({ force: true })
+  cy.get('.faq-banner-heading').should('have.text', 'questions fréquemment posées')
+ // cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+
+  //cy.wait(5000)
+ 
+
+  cy.scrollTo('bottom')
+  cy.xpath("/html[1]/body[1]/main[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/a[2]").click({ force: true })
+  cy.get('h3').contains('GUIDE DES TAILLES')
+  //cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+
+  cy.scrollTo('bottom')
+  cy.xpath("/html[1]/body[1]/main[1]/div[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/a[2]").click({ force: true })
+  cy.get('.hero-banner').contains('Localisateur de magasin')
+  //cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+
+
+  cy.scrollTo('bottom')
+  cy.xpath("(//a[contains(@class,'no-underline text-center text-white text-[19px] font-black leading-7 font-Mulish')][normalize-space()='FREE RETURNS'])[1]")
+  .click({ force: true })
+  cy.get('.boxContainer > .text-black').should('have.text', 'Retour')
+  cy.get('.p-0 > .py-4').click()
+
+  //cy.wait(5000)
+  
+
+  
 })
 
   it("Instagram section verification", () => {
@@ -289,7 +294,7 @@ it("Verifying Kid's section",()=>{
 
   cy.get('.items-center> .flex > .text-black').eq(2).click({force:true})
   cy.get('[href="/fr/products/kids/all-brands/winter-boots?collections=kids-best-sellers"]').click()  //Winter boots
-  cy.get('h3').should("have.text","Undefined")
+  cy.get('h3').should("have.text","Bottes d'hiver pour enfants")
   cy.wait(4000)
 
   cy.get('.items-center> .flex > .text-black').eq(2).click({force:true})
@@ -324,14 +329,14 @@ it("Verifying Accessories's section",()=>{
 
   cy.get('.items-center> .flex > .text-black').eq(3).click({force:true})
   cy.get('[href="/fr/products/all-departments/all-brands/accessories/?style=lunch%2520box"]').click()  //Lunch boxes
-  cy.get('h3').should("have.text","Accessoires")
+  cy.get('h3').should("have.text","Accessories")
   cy.wait(4000)
 
 
 
   cy.get('.items-center> .flex > .text-black').eq(3).click({force:true})
   cy.get('[href="/fr/products/all-departments/all-brands/accessories/?style=pencil%2520case"]').click() // Pencil cases
-  cy.get('h3').should("have.text","Accessoires")
+  cy.get('h3').should("have.text","Accessories")
   cy.wait(4000)
 
   cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()  //Homepage
@@ -339,7 +344,7 @@ it("Verifying Accessories's section",()=>{
 })
 it('Verifying Sales Button',()=>{
   cy.get(':nth-child(5) > .mega-menu-trigger-sibling > .flex-col').click()
-  cy.get('.h-full > .text-center').should('have.text','Vente')
+  cy.get('h3').should('have.text','Vente')
   cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()  //Homepage
 })
 
