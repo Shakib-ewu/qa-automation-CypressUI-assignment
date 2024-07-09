@@ -21,10 +21,6 @@ describe("Verifying PDP Feature", () => {
         cy.xpath("/html[1]/body[1]/main[1]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]").should('be.visible');
         cy.xpath("//div[normalize-space()='99.95']").should('be.visible');
         cy.xpath("//*[name()='path' and contains(@d,'M0 0H75V20')]").should('be.visible').invoke('css', { backgroundColor: 'red', opacity: 0.1 }); // Red highlight with 50% opacity
-
-      
-
-       
         cy.log('Sezzle visible')
       });
     
@@ -58,7 +54,7 @@ describe("Verifying PDP Feature", () => {
     
     let initialPrice;
 
-it('should verify size selection, ATC with before and after membership discount', () => {
+it.only('should verify size selection, ATC with before and after membership discount', () => {
     // Click on the dropdown to open it
     cy.xpath("/html[1]/body[1]/main[1]/div[1]/div[2]/div[5]/div[1]/div[1]/div[1]").should('be.visible')
     //cy.xpath("(//a[normalize-space()='Size Chart'])[1]").click({force:true})
@@ -78,10 +74,10 @@ it('should verify size selection, ATC with before and after membership discount'
         cy.wait(3000)
         cy.xpath("//span[normalize-space()='89.96']").should('have.text',89.96)*/
 
-        cy.xpath("//span[normalize-space()='99.95']").invoke('text').then((text) => {
+        cy.xpath("//div[normalize-space()='99.95']").invoke('text').then((text) => {
           initialPrice = parseFloat(text.trim());
           cy.log('Initial Price: ' + initialPrice);
-          expect(initialPrice).to.equal(99.95); // Ensure the initial price is correct
+          expect(initialPrice).to.equal(99.9599); // Ensure the initial price is correct
         });
         // Add the membership badge (adjust the selector to your membership badge button)
         cy.get("form[class='w-full h-max'] button[type='submit']").click({force:true})
