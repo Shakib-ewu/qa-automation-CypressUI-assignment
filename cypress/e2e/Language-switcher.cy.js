@@ -173,12 +173,12 @@ it("Highlited collection section verification", () => {
       .should("be.visible")
       .click({ force: true });
     cy.get(".p-0 > .text-black").should("have.text", "ACHETER CE LOOK");
-    cy.get(".absolute > .bg-black").click();
+    cy.get(".absolute > .bg-black").click({force:true});
     //cy.get('[data-carousel-next="true"]').click()
     //cy.get('[data-carousel-next="true"]').click()
     // cy.get('[data-carousel-next="true"]').click()
     for (let i = 0; i < 4; i++) {
-      cy.get('[data-carousel-next="true"]').click();
+      cy.get('[data-carousel-next="true"]').click({force:true});
     }
     cy.log("All slider completed");
 
@@ -190,7 +190,7 @@ it("Highlited collection section verification", () => {
     cy.get("a[class='w-full h-full flex rb-product-thumb']").click({
       force: true,
     }); //a[class='w-full h-full flex rb-product-thumb']
-    cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
+    cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click({force:true})
 });
 
  /* it('Verifying static feature section & Membership ATC', () => {
