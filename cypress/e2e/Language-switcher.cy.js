@@ -215,7 +215,7 @@ it("Highlited collection section verification", () => {
 it('Verifying footer sections', () => {
   cy.scrollTo("bottom");
   cy.get('[href="/fr/privacy-policy/"]').click({ force: true })
-  cy.wait(4000)
+  cy.wait(5000)
 
   cy.get("body > header:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > a:nth-child(1)").click()
   cy.get('[href="/fr/terms-conditions/"]').click({ force: true })
