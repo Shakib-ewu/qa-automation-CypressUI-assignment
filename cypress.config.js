@@ -8,8 +8,8 @@ module.exports = defineConfig({
     html: false,
     json: true,
   },
-  defaultCommandTimeout: 10000,
-  pageLoadTimeout: 60000,
+  defaultCommandTimeout: 8000,
+  //pageLoadTimeout: 1000,
   chromeWebSecurity: false,
   retries: {
     runMode: 2,    // Retries when running via `cypress run`
