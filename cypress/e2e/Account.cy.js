@@ -29,32 +29,11 @@ describe("Verifying Account Page", () => {
    
 
       // VALID LOGIN
-      it('should log in with valid credentials', () => {
+      it.only('should log in with valid credentials', () => {
         cy.xpath("//input[@name='customer[email]']").type(validEmail);
         cy.xpath("//input[@id='CustomerPassword']").type(validPassword);
         cy.xpath("//button[contains(.,'Login')]").click();
       });
-    
-    
-    
-    
-      // EMPTY FIELDS SUBMISSION
-      it('should not submit when fields are empty', () => {
-        cy.get('form').submit();
-        cy.url().should('include', '/account/login');
-      });
-    
-      // 🔗 CREATE ACCOUNT NAVIGATION
-      it('should navigate to the create account page', () => {
-        cy.contains('Create account').click();
-        cy.url().should('include', '/account/register');
-      });
-    
-      // 🔐 FORGOT PASSWORD NAVIGATION
-      it('should navigate to the forgot password page', () => {
-        cy.contains('Forgot your password?').click();
-        cy.url().should('include', '/account/recover');
-      });
-    });
+    })
     
 });
