@@ -9,7 +9,7 @@ module.exports = defineConfig({
     json: true,
   },
   defaultCommandTimeout: 8000,
-  //pageLoadTimeout: 1000,
+  pageLoadTimeout: 10000,
   chromeWebSecurity: false,
   retries: {
     runMode: 2,    // Retries when running via `cypress run`
