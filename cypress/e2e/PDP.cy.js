@@ -44,7 +44,7 @@ it.only('Verifies product, adds to wishlist and cart, checks out and visits blog
   // Add to wishlist
   cy.xpath('//span[@class="swym-wishlist-cta"]').invoke('show').click({force:true});
   // Add to cart
-  cy.xpath('//button[@id="ProductSubmitButton-template--18252412780736__main"]')
+  cy.xpath('//button[@id="ProductSubmitButton-template--18258470961344__main"]')
     .should('be.visible').
     eq(0).click({ force: true });
 
