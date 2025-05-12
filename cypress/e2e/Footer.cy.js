@@ -32,6 +32,12 @@ describe('Verifying Footer Links', () => {
     { label: 'WINE', path: '/collections/wine' },
     { label: 'SPIRITS', path: '/collections/spirits' },
     { label: 'BEER', path: '/collections/beer' },
+    { label: 'MY ACCOUNT', path: '/account' },
+    { label: 'WISHLIST', path: '/pages/swym-wishlist' },       // Adjust path if needed    // Adjust path if needed
+     { label: 'PRIVACY POLICY', path: '/pages/privacy-policy' },
+    { label: 'TERMS & CONDITIONS', path: '/pages/terms-conditions' },
+   
+
   ];
 
   // Define the helper function
