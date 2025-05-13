@@ -44,7 +44,7 @@ it.only('Verifies product, adds to wishlist and cart, checks out and visits blog
   // Add to wishlist
   cy.xpath('//span[@class="swym-wishlist-cta"]').invoke('show').click({force:true});
   // Add to cart
-  cy.xpath('//button[@class="cart__checkout-button button cta-filled"]')
+  cy.xpath('//button[@id="ProductSubmitButton-template--18258470961344__main"]')   //ProductSubmitButton-template--18258470961344__main
     .should('be.visible').
     eq(0).click({ force: true });
 
@@ -63,25 +63,23 @@ it.only('Verifies product, adds to wishlist and cart, checks out and visits blog
     . eq(0)
     .click({ force: true });
 
-  // Scroll again
-  cy.scrollTo('center');
 
   // Visit blog: Caramel Espresso Martini
   cy.get("a[href='/blogs/news/caramel-espresso-martini']")
-    .should('exist')
+    .should('exist').scrollIntoView()
     .click({ force: true });
   cy.go('back');
 
   // Visit blog: Citrus Gin Fizz
   cy.get("a[href='/blogs/news/citrus-gin-fizz']")
-    .should('exist')
+    .should('exist').scrollIntoView()
     .click({ force: true });
   cy.go('back');
 
   // Visit the general blog page
   cy.get("a[href='/blogs/news']")
     .first()
-    .should('exist')
+    .should('exist').scrollIntoView()
     .click({ force: true });
   cy.go('back');
 });

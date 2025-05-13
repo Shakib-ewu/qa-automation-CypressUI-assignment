@@ -18,10 +18,11 @@ describe('Verifying Cart Drawer', () => {
     
 
     cy.wait(5000);
-     cy.xpath("//button[@name='button-route-3']")
+     cy.xpath("//button[contains(@id,'CartDrawer-Checkout')]")
     .should('exist')
     .click({ force: true });
-
+ 
+    cy.go('back');
 
 
 });
