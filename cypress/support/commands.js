@@ -54,6 +54,12 @@ Cypress.Commands.add('clickButton', (selector) => {
 });
 
 
+Cypress.Commands.add('hover', { prevSubject: 'element' }, (subject) => {
+  cy.wrap(subject).trigger('mouseover', { force: true });
+});
+
+
+
 
 const app = window.top;
 if (!app.document.head.querySelector('[data-hide-command-log-request]')) {

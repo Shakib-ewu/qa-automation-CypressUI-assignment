@@ -87,6 +87,23 @@ it('should load more products when "Load More" is clicked', () => {
   });
 });
 
+it('should find a specific product by search', () => {
+  const productName = 'Glen Scotia Victoriana Campbeltown Single Malt Scotch Whisky';
+
+  // Open the search modal/input
+   cy.xpath("//input[contains(@id,'Search-In-Modal')]").eq(0).click();
+
+  // Type the product name and press Enter
+  cy.get('input[name="q"]').first().type(`${productName}{enter}`);
+
+  // Verify search results contain the product
+  cy.get('#CardLink--8117308457152')
+    .should('exist')
+    .contains(productName)
+    .should('be.visible');
+});
+
+
 
 
 
