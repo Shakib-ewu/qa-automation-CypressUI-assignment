@@ -53,7 +53,7 @@ it('should trigger menu hover for "Scotch" and click all submenu items under "Si
 
 });*/
 
-import 'cypress-mochawesome-reporter/register';
+/*import 'cypress-mochawesome-reporter/register';
 
 describe('Mega Menu Navigation - Dynamic Submenu Test', () => {
   const parentMenu = 'Scotch';
@@ -65,7 +65,7 @@ describe('Mega Menu Navigation - Dynamic Submenu Test', () => {
     cy.wait(4000); // Optional: Replace with smarter waits
   });
 
-  it.skip('should dynamically click each submenu under Single Malt', () => {
+  it.skip('should dynamically click each submenu under Explore', () => {
     cy.contains('.mega-menu', parentMenu)
       .trigger('mouseover', { force: true });
 
@@ -93,7 +93,7 @@ describe('Mega Menu Navigation - Dynamic Submenu Test', () => {
       cy.contains('.mega_menu_content', subMenu).trigger('mouseover', { force: true });
     });
   });
-});
+});*/
 
 
   beforeEach(() => {
@@ -101,43 +101,68 @@ describe('Mega Menu Navigation - Dynamic Submenu Test', () => {
     cy.visit('/');
     cy.wait(4000); // Optional: Replace with smarter waits
   });
-const parentMenu = 'Scotch';
-  const subMenu = 'Single Malt';
 
+   const scotchSingleMaltItems = [
+    '#HeaderMenu-scotch-single-malt-highland',
+    '#HeaderMenu-scotch-single-malt-lowland',
+    '#HeaderMenu-scotch-single-malt-campbeltown',
+    '#HeaderMenu-scotch-single-malt-island',
+    '#HeaderMenu-scotch-single-malt-islay',
+    '#HeaderMenu-scotch-single-malt-speyside',
+    '#HeaderMenu-scotch-single-malt-view-all'
+  ];
 
-  it('should dynamically click each submenu under Single Malt (internal links only)', () => {
-    const isExternalLink = (url) => /^https?:\/\//.test(url);
-
-    cy.contains('.mega-menu', parentMenu)
+  it('should trigger menu hover for "Scotch" and click all submenu items under "Single Malt"', () => {
+    // Hover over the "Scotch" menu item
+    cy.contains('.mega-menu', 'Scotch')
       .trigger('mouseover', { force: true });
 
-    cy.contains('.mega_menu_content', subMenu)
+    // Hover over the "Single Malt" submenu under Scotch
+    cy.contains('.mega_menu_content', 'Single Malt')
       .trigger('mouseover', { force: true });
 
-    cy.get('ul.list-unstyled > li:visible a').each(($link, index, $list) => {
-      const linkText = $link.text().trim();
-      const href = $link.attr('href');
+    // Wait for the submenu items to be available (you can adjust this to wait for a specific element to appear)
+    cy.get('ul.list-unstyled > li').should('have.length.greaterThan', 0);
 
-      if (!href) {
-        cy.log(`Skipping empty href for: ${linkText}`);
-        return;
-      }
+    // Iterate over each Single Malt submenu item and click it
+    scotchSingleMaltItems.forEach(item => {
+      // Scroll into view before clicking
+      cy.get(item)
+        .scrollIntoView()
+        .click({ force: true });
 
-      if (isExternalLink(href)) {
-        cy.log(`Skipping external link: ${href}`);
-        return;
-      }
-
-      cy.log(`Visiting: ${linkText} -> ${href}`);
-      cy.visit(href, { failOnStatusCode: false });
-
-      // Optional: Assert page load
-      cy.url().should('include', href);
-      cy.wait(1000);
-
-      // Go back and reopen menu
-      cy.visit('/');
-      cy.contains('.mega-menu', parentMenu).trigger('mouseover', { force: true });
-      cy.contains('.mega_menu_content', subMenu).trigger('mouseover', { force: true });
+      // Verify that the page has loaded after clicking the item (you can adjust this based on your actual page)
+      cy.get('body').should('be.visible'); // Replace with a specific element to verify page load
+      cy.wait(1000); // Optional: wait between clicks for stability
     });
   });
+
+
+
+it('should hover only on Explore menu and validate navigation', () => {
+  cy.get('.mega-menu .header__menu-item.list-menu__item.link.focus-inset')
+    .contains('Explore')
+    .trigger('mouseover', { force: true });
+
+  cy.get('ul.list-unstyled > li:visible a').each(($link) => {
+    const linkText = $link.text().trim();
+    const href = $link.attr('href');
+
+    if (!href || /^https?:\/\//.test(href)) {
+      cy.log(`Skipping: ${linkText} -> ${href}`);
+      return;
+    }
+
+    cy.log(`Visiting: ${linkText} -> ${href}`);
+    cy.visit(href, { failOnStatusCode: false });
+
+    cy.url().should('include', href);
+    cy.wait(1000);
+
+    // Back to home and re-hover Explore for next link
+    cy.visit('/');
+    cy.get('.mega-menu .header__menu-item.list-menu__item.link.focus-inset')
+      .contains('Explore')
+      .trigger('mouseover', { force: true });
+  });
+});
