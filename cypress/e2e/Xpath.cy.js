@@ -4,11 +4,12 @@ describe('Verifying Homepage', () => {
       cy.intercept('/some-3rd-party-script.js*').as('externalScript');
       cy.visit('/');
       cy.wait(4000);
+      cy.get('body').click(0, 0);
     });
 
     it('Verifying video detection', () => {
         cy.scrollTo('center');
-        cy.xpath('//a[contains(text(), "Craft Cellars Presents Champagne Gremillet Fine Wine Tasting May 15, 2025")]')
+        cy.xpath('//a[contains(text(), "Glen Keith 21 Year Old Speyside Single Malt")]')
     .should('exist')
     .first()
     .click({ force: true });

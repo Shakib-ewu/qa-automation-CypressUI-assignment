@@ -6,18 +6,19 @@ describe("Verifying Account Page", () => {
       cy.intercept('/some-3rd-party-script.js*').as('externalScript');
       cy.visit('/')
       cy.wait(4000)
+      cy.get('body').click(0, 0);
   })
 
   it('Verifying products in PDP', () => {
     cy.scrollTo('center');
-    cy.xpath('//a[contains(text(), " Craft Cellars Presents Champagne Gremillet Fine Wine Tasting May 15, 2025")]')
+    cy.xpath('//a[contains(text(), " Glen Keith 21 Year Old Speyside Single Malt")]')
       .should('exist').eq(0).click({force:true}); // Added assertion for better test validation
       cy.xpath('//span[@class="swym-wishlist-cta"]').invoke('show').click({force:true});
       cy.xpath('//button[@id="ProductSubmitButton-template--18252412780736__main"]').eq(0).click({force:true});
       cy.wait(4000);
       cy.xpath("//button[@class='cart__checkout-button button cta-filled']").eq(0).click({force:true});
       cy.xpath("//a[@href='https://craftcellars.ca']").click({force:true});
-      cy.xpath('//a[contains(text(), " Craft Cellars Presents Champagne Gremillet Fine Wine Tasting May 15, 2025")]').eq(0).click({force:true});
+      cy.xpath('//a[contains(text(), " Glen Keith 21 Year Old Speyside Single Malt")]').eq(0).click({force:true});
       cy.scrollTo('center');
       cy.get("a[href='/blogs/news/caramel-espresso-martini']").click({ force: true });
       cy.go('back');
@@ -36,7 +37,7 @@ describe("Verifying Account Page", () => {
 it.only('Verifies product, adds to wishlist and cart, checks out and visits blogs', () => {
   // Scroll to center and open the product
   cy.scrollTo('center');
-  cy.xpath('//a[contains(text(), "Craft Cellars Presents Champagne Gremillet Fine Wine Tasting May 15, 2025")]')
+  cy.xpath('//a[contains(text(), "Glen Keith 21 Year Old Speyside Single Malt")]')
     .should('exist')
     .first()
     .click({ force: true });
@@ -58,7 +59,7 @@ it.only('Verifies product, adds to wishlist and cart, checks out and visits blog
     cy.xpath("//a[@href='https://craftcellars.ca']").click({force:true});
 
   // Reopen the same product
-  cy.xpath('//a[contains(text(), "Craft Cellars Presents Champagne Gremillet Fine Wine Tasting May 15, 2025")]')
+  cy.xpath('//a[contains(text(), "Glen Keith 21 Year Old Speyside Single Malt")]')
     .should('exist')
     . eq(0)
     .click({ force: true });

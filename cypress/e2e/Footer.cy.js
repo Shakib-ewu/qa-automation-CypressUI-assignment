@@ -6,6 +6,7 @@ describe('Verifying Footer Links', () => {
     cy.intercept('/some-3rd-party-script.js*').as('externalScript');
     cy.visit('/');
     cy.wait(4000);
+    cy.get('body').click(0, 0);
   });
 
   context('Visit Our Store Section', () => {

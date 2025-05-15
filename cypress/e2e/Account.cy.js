@@ -6,7 +6,9 @@ describe("Verifying Account Page", () => {
         cy.viewport(1920,1080);
         cy.intercept('/some-3rd-party-script.js*').as('externalScript');
         cy.visit('/')
-        cy.wait(4000)
+        cy.wait(3000)
+      // Wait for the modal to appear, then close it
+      cy.get('body').click(0, 0); // Click top-left corner (likely outside modal)
         cy.xpath('//*[contains(@class, "header__icon header__icon--account link focus-inset")]').click();
     })
 
