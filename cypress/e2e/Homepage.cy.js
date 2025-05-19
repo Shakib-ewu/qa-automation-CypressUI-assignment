@@ -72,6 +72,16 @@ it('should click on each nav tab and verify product visibility', () => {
     });
 });
 
+it('Verifying explore now button and collections', () => {
+  cy.xpath("//span[@class='cta-filled home-order-button']")
+    .first()
+    .scrollIntoView({ duration: 300 })
+    .should('be.visible')
+    .click();
+    cy.contains('Collections').should('be.visible');
+
+});
+
 
 });
 
