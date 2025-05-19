@@ -7,7 +7,7 @@ describe('Verifying Homepage', () => {
       cy.get('body').click(0, 0);
     });
 
-    it('Verifying video detection', () => {
+    it('Verifying sample product detection', () => {
         cy.scrollTo('center');
         cy.xpath('//a[contains(text(), "Glen Keith 21 Year Old Speyside Single Malt")]')
     .should('exist')
