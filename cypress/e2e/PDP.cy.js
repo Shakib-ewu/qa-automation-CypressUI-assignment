@@ -35,7 +35,7 @@ describe("Verifying Account Page", () => {
 });
 
 it.only('Verifies product, adds to wishlist and cart, checks out and visits blogs', () => {
-  // Scroll to center and open the product
+  // Scroll to product section and click the product
   cy.scrollTo('center');
   cy.xpath('//a[contains(text(), "Glen Keith 21 Year Old Speyside Single Malt")]')
     .should('exist')
@@ -43,12 +43,17 @@ it.only('Verifies product, adds to wishlist and cart, checks out and visits blog
     .click({ force: true });
 
   // Add to wishlist
-  cy.xpath('//span[@class="swym-wishlist-cta"]').invoke('show').click({force:true});
-  // Add to cart
-  cy.xpath('//button[@id="ProductSubmitButton-template--18288524755136__main"]')   //ProductSubmitButton-template--18258470961344__main
+ cy.xpath('//span[@class="swym-wishlist-cta"]')
+ .should('exist')
+  .invoke('show') // only works if the element allows JS override
+  .click({ force: true });
+  cy.wait(3000);
+
+  // Scroll to and click Add to Cart button
+  cy.scrollTo('center');
+ cy.xpath('//button[@id="ProductSubmitButton-template--18288524755136__main"]') //ProductSubmitButton-template--18258470961344__main
     .should('be.visible').
     eq(0).click({ force: true });
-
 
 
   // Proceed to checkout
@@ -56,34 +61,41 @@ it.only('Verifies product, adds to wishlist and cart, checks out and visits blog
     .should('be.visible').eq(0)
     .click({ force: true });
 
-    cy.xpath("//a[@href='https://craftcellars.ca']").click({force:true});
+
+  // Navigate back to home
+  cy.xpath("//a[@href='https://craftcellars.ca']")
+    .should('exist')
+    .click({ force: true });
 
   // Reopen the same product
   cy.xpath('//a[contains(text(), "Glen Keith 21 Year Old Speyside Single Malt")]')
     .should('exist')
-    . eq(0)
+    .first()
     .click({ force: true });
-
 
   // Visit blog: Caramel Espresso Martini
   cy.get("a[href='/blogs/news/caramel-espresso-martini']")
-    .should('exist').scrollIntoView()
+    .scrollIntoView()
+    .should('exist')
     .click({ force: true });
   cy.go('back');
 
   // Visit blog: Citrus Gin Fizz
   cy.get("a[href='/blogs/news/citrus-gin-fizz']")
-    .should('exist').scrollIntoView()
+    .scrollIntoView()
+    .should('exist')
     .click({ force: true });
   cy.go('back');
 
-  // Visit the general blog page
+  // Visit general blog page
   cy.get("a[href='/blogs/news']")
     .first()
-    .should('exist').scrollIntoView()
+    .scrollIntoView()
+    .should('exist')
     .click({ force: true });
   cy.go('back');
 });
+
 
 });
 
