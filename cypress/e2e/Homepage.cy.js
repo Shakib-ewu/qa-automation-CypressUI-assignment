@@ -82,6 +82,58 @@ it('Verifying explore now button and collections', () => {
 
 });
 
+const categories = ['Spirits', 'scotch', 'whisky', 'wine', 'beer & more'];
+  const collectionItems = ['TEQUILA', 'VODKA', 'GIN', 'RUM', 'COGNAC & ARMAGNAC'];
+
+  it('should display the Shop By Spirits dropdown and options', () => {
+  
+  cy.contains('Explore Classic and New Sprite Flavors for Every Taste and Experience')
+    .scrollIntoView()
+    .should('be.visible')
+    .trigger('mouseover');
+  cy.wait(500);
+
+  cy.get('.spirits_dropdown')
+    .should('be.visible')
+    .click(); // no force
+
+  categories.forEach((cat) => {
+   cy.get('.spirits_item').contains(cat).should('be.visible');
+  });
+
+});
+
+
+
+it('should click each category in dropdown and verify products are shown', () => {
+  cy.contains('Explore Classic and New Sprite Flavors for Every Taste and Experience')
+    .scrollIntoView()
+    .should('be.visible')
+    .trigger('mouseover');
+
+  cy.wait(500);
+
+  categories.forEach((cat) => {
+    cy.log(`Clicking category: ${cat}`);
+
+    cy.get('.spirits_dropdown')
+      .should('be.visible')
+      .click();
+
+    cy.get('.spirits_item')
+      .contains(cat)
+      .should('be.visible')
+      .click({ force: true });
+
+    cy.get('.swiper-wrapper')
+      .should('exist')
+      .and('be.visible');
+
+    cy.wait(1000); // pause to see the click effect
+  });
+});
+
+
 
 });
 
