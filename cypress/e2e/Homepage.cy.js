@@ -133,6 +133,18 @@ it('should click each category in dropdown and verify products are shown', () =>
   });
 });
 
+ it('should render subscription section', () => {
+  cy.scrollTo('bottom');
+    cy.contains('Subscribe Today').should('be.visible');
+    cy.contains('Be the first to know about our exclusive offers').should('be.visible');
+  });
+
+  it('should submit successfully with valid email', () => {
+    cy.get('input[type="email"]').type('validuser@example.com');
+    cy.get('button').contains('Subscribe').click();
+  });
+
+  //
 
 
 });
