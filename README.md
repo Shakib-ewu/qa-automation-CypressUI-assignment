@@ -16,6 +16,19 @@ cc_cypress_automation/
 └── package-lock.json        # Exact versions of installed dependencies
 ```
 
+## ✅ Features
+
+- `Account.cy.js` – Account page tests  
+- `Cart.cy.js` – Cart functionality  
+- `Footer.cy.js` – Footer validation  
+- `GiftPage.cy.js` – Gift page checks  
+- `Homepage.cy.js` – Homepage elements  
+- `Megamenu.cy.js` – Megamenu navigation  
+- `PDP.cy.js` – Product Detail Page  
+- `Search.cy.js` – Search functionality  
+- `Xpath.cy.js` – XPath selector tests  
+
+
 ## 🚀 Getting Started
 Prerequisites
 
