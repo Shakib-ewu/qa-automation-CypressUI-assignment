@@ -13,7 +13,7 @@ describe('Verifying Cart Drawer', () => {
     cy.get('span.svg-wrapper > svg.icon-cart-empty').click();
     cy.xpath("//*[contains(text(), 'Your cart is empty')]").should('exist');
     cy.xpath("//a[@class='button cta-filled']").click();
-    cy.xpath("//button[contains(@aria-labelledby,'quick-add-template--18288524067008__product-grid8117469249728-submit title-template--18288524067008__product-grid-8117469249728')]").scrollIntoView()
+    cy.xpath("//button[contains(@aria-labelledby,'quick-add-template--18301241688256__product-grid8117469249728-submit title-template--18301241688256__product-grid-8117469249728')]").scrollIntoView()
     .should('exist')
     .click({ force: true });
     

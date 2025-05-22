@@ -51,7 +51,7 @@ it.only('Verifies product, adds to wishlist and cart, checks out and visits blog
 
   // Scroll to and click Add to Cart button
   cy.scrollTo('center');
- cy.xpath('//button[@id="ProductSubmitButton-template--18288524755136__main"]') //ProductSubmitButton-template--18258470961344__main
+ cy.xpath('//button[@id="ProductSubmitButton-template--18301242376384__main"]') //ProductSubmitButton-template--18258470961344__main
     .should('be.visible').
     eq(0).click({ force: true });
 
