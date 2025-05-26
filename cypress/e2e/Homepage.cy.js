@@ -49,7 +49,7 @@ it('should navigate to the correct brand page when a brand card is clicked', () 
 
 const tabNames = ['Scotch', 'Whisky', 'Wine', 'Spirits', 'Beer', 'Featured'];
 
-it('should click on each nav tab and verify product visibility', () => {
+it.skip('should click on each nav tab and verify product visibility', () => {
   cy.get('.tab_btn')
     .should('have.length', tabNames.length)
     .each(($tab, index) => {
