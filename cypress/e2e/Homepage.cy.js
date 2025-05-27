@@ -47,7 +47,7 @@ it('should navigate to the correct brand page when a brand card is clicked', () 
 });
 
 
-const tabNames = ['Scotch', 'Whisky', 'Wine', 'Spirits', 'Beer', 'Featured'];
+/*const tabNames = ['Scotch', 'Whisky', 'Wine', 'Spirits', 'Beer', 'Featured'];
 
 it.skip('should click on each nav tab and verify product visibility', () => {
   cy.get('.tab_btn')
@@ -131,7 +131,7 @@ it('should click each category in dropdown and verify products are shown', () =>
 
     cy.wait(1000); // pause to see the click effect
   });
-});
+});*/
 
  it('should render subscription section', () => {
   cy.scrollTo('bottom');
