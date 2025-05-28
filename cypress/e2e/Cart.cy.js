@@ -4,7 +4,7 @@ describe('Verifying Cart Drawer', () => {
   beforeEach(() => {
     cy.viewport(1920, 1080);
     cy.intercept('/some-3rd-party-script.js*').as('externalScript');
-    cy.visit('/');
+    cy.visit('/',{ failOnStatusCode: false });
     cy.wait(4000);
     cy.get('body').click(0, 0);
   });

@@ -1,8 +1,7 @@
-
 name: CI/CD Pipeline
- 
+
 on: [push]
- 
+
 jobs:
   build:
     runs-on: windows-latest
@@ -15,14 +14,10 @@ jobs:
           node-version: '14'
       - name: Install dependencies
         run: npm install
-      - name: Install Chrome (Optional)
-        run: |
-          choco install googlechrome --ignore-checksums  # Use --ignore-checksums to bypass checksum validation
- 
-      - name: Run Cypress tests with Chrome
-        run: npx cypress run --browser chrome
+      # Removed the Install Chrome step as it's not needed for the default Electron browser
+      - name: Run Cypress tests
+        run: npx cypress run
         env:
           CI: true
       - name: Build project
         run: npm run build
-      

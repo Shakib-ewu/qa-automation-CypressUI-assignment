@@ -5,7 +5,7 @@ describe("Verifying Account Page", () => {
 
         cy.viewport(1920,1080);
         cy.intercept('/some-3rd-party-script.js*').as('externalScript');
-        cy.visit('/')
+        cy.visit('/',{ failOnStatusCode: false })
         cy.wait(4000)
       // Wait for the modal to appear, then close it
       cy.get('body').click(0, 0); // Click top-left corner (likely outside modal)

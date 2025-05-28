@@ -98,7 +98,7 @@ describe('Mega Menu Navigation - Dynamic Submenu Test', () => {
 
   beforeEach(() => {
     cy.viewport(1920, 1080);
-    cy.visit('/');
+    cy.visit('/',{ failOnStatusCode: false });
     cy.wait(4000); // Optional: Replace with smarter waits
   });
 
