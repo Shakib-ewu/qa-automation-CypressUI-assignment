@@ -9,7 +9,7 @@ describe('Verifying Cart Drawer', () => {
     cy.get('body').click(0, 0);
   });
 
-  it('Verifying empty cart', () => {
+  it('Verifying empty cart and adding product to cart', () => {
     cy.get('span.svg-wrapper > svg.icon-cart-empty').click();
     cy.xpath("//*[contains(text(), 'Your cart is empty')]").should('exist');
     cy.xpath("//a[@class='button cta-filled']").click();

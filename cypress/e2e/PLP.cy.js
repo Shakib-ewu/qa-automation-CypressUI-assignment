@@ -1,6 +1,6 @@
 import 'cypress-mochawesome-reporter/register';
 
-describe('Verifying Plp', () => {
+describe('Verifying PLP', () => {
   beforeEach(() => {
     cy.viewport(1920, 1080);
     cy.intercept('/some-3rd-party-script.js*').as('externalScript');
