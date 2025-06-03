@@ -7,7 +7,10 @@ module.exports = defineConfig({
     overwrite: false,
     html: false,
     json: true,
-  },
+},
+experimentalMemoryManagement: true,
+numTestsKeptInMemory: 0,
+
   defaultCommandTimeout: 8000,
   pageLoadTimeout: 10000,
   chromeWebSecurity: false,
