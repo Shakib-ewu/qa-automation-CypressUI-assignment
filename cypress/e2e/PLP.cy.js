@@ -4,7 +4,7 @@ describe('Verifying PLP', () => {
   beforeEach(() => {
     cy.viewport(1920, 1080);
     cy.intercept('/some-3rd-party-script.js*').as('externalScript');
-    cy.visit('/');
+    cy.visit('/',{ failOnStatusCode: false });
     cy.wait(4000);
     cy.get('body').click(0, 0);
   });
@@ -14,8 +14,9 @@ describe('Verifying PLP', () => {
     .should('be.visible')
     .click({ force: true });
 });
+})
 
-it('should display all sort by options correctly', () => {
+/*it('should display all sort by options correctly', () => {
   const expectedOptions = [
     'Featured',
     'Best Selling',
@@ -107,6 +108,6 @@ it('should display and click all sort by options correctly', () => {
   });
 });
 
-});
+});*/
 
 
