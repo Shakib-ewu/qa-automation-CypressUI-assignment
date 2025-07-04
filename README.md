@@ -69,5 +69,5 @@ Run Tests in Headless Mode
 
 ### <center><h2>Screenshots</h2></center>  
 ### Mochawesome-Report:  
-<img src="1.png">
+<img src="Screenshot of Reports/1.png">
 
