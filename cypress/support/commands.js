@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //require('cypress-plugin-retries');
-require('@4tw/cypress-drag-drop');
+/*require('@4tw/cypress-drag-drop');
 import 'cypress-file-upload';
 require('cypress-xpath');
 
@@ -69,4 +69,75 @@ if (!app.document.head.querySelector('[data-hide-command-log-request]')) {
   style.setAttribute('data-hide-command-log-request', '');
 
   app.document.head.appendChild(style);
-}
+}*/
+
+// cypress/support/commands.js
+
+// ✅ Common Cypress plugins
+import 'cypress-file-upload';
+require('@4tw/cypress-drag-drop');
+require('cypress-xpath');
+
+// ✅ Handle known ResizeObserver loop error
+const resizeObserverLoopErrRe = /ResizeObserver loop limit exceeded/;
+
+Cypress.on('uncaught:exception', (err) => {
+  if (resizeObserverLoopErrRe.test(err.message)) {
+    return false;
+  }
+});
+
+// ✅ Custom Commands
+
+// Get iframe body (if used in your tests)
+Cypress.Commands.add('getIframe', (selector = '#mce_0_ifr') => {
+  return cy
+    .get(selector)
+    .its('0.contentDocument.body')
+    .should('not.be.empty')
+    .then(cy.wrap);
+});
+
+// Force-click a button (generic)
+Cypress.Commands.add('clickButton', (selector) => {
+  cy.get(selector).click({ force: true });
+});
+
+// Hover over an element
+Cypress.Commands.add('hover', { prevSubject: 'element' }, (subject) => {
+  cy.wrap(subject).trigger('mouseover', { force: true });
+});
+
+// ✅ UI Automation Custom Commands
+
+Cypress.Commands.add('createBoard', (boardName) => {
+  cy.get('[data-cy="create-board"]').click().type(`${boardName}{enter}`);
+  cy.url().should('include', '/board/');
+  cy.get('input.board-title').should('have.value', boardName);
+});
+
+Cypress.Commands.add('addList', (listName) => {
+  cy.get('input[placeholder="Enter list title..."]').should('be.visible').type(`${listName}{enter}`);
+});
+
+Cypress.Commands.add('verifyListExists', (listName, index) => {
+  cy.get('[data-cy="list-name"]')
+    .should('have.length.greaterThan', index)
+    .eq(index)
+    .should('be.visible')
+    .and('have.value', listName);
+});
+
+Cypress.Commands.add('deleteListByIndex', (index) => {
+  cy.get('[data-cy="list"]')
+    .eq(index)
+    .within(() => {
+      cy.get('[data-cy="list-options"]').click();
+    });
+  cy.contains('Delete list').click();
+});
+
+
+
+
+
