@@ -67,5 +67,3 @@ Run Tests in Headless Mode
  npx cypress run
 ```
 
-## 🔧 GitHub Actions CI/CD
-This project includes GitHub Actions workflows located in the .github/workflows/ directory. These workflows automate the testing process, ensuring that tests are run on each push or pull request. Customize the workflow files to fit your CI/CD requirements. Currently CI/CD workflows not working properly
