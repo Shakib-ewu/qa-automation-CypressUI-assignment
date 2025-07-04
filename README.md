@@ -67,3 +67,7 @@ Run Tests in Headless Mode
  npx cypress run
 ```
 
+### <center><h2>Screenshots</h2></center>  
+### Mochawesome-Report:  
+<img src="1.png">
+
